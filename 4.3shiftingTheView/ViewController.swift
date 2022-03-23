@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  4.1imagePicker
+//  4.3shiftigTheView
 //
 //  Created by mairo on 19/03/2022.
 //
@@ -150,7 +150,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     
-    // MARK: Sign up to be notified when the keyboard appears
+    // MARK: subscribe/sign up to be notified when the keyboard appears
     // see also func func viewWilAppear & viewWillDisappear at the begining of project where I:
         // subscribeToKeyboardNotifications() & unsubscribeFromKeyboardNotifications()
     func subscribeToKeyboardNotifications() {
@@ -160,6 +160,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    // MARK: unsubscribe 
     func unsubscribeFromKeybordNotification() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
