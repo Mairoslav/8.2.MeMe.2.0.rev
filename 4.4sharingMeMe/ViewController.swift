@@ -68,7 +68,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     // MARK: actions to the buttons to load the UIImagePickerController
     // we’ll call up the UIImagePickerController here
-    
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary // an image is coming from the album
@@ -83,7 +82,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // MARK: - UIImagePickerControllerDelegate Method I.
     // to read the Image Picked from UIImagePickerController - so that selected picture appears in UIImageView
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // will send the data back for us to use in that Swift Dictionary named “info”
         // we have to unpack it from there with a key asking for what media information we want.
@@ -104,7 +102,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // MARK: - UIImagePickerControllerDelegate Method II.
     // is called when the user taps the “Cancel” button on top left of image picker
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil) // dismiss image picker after button "Cancel" is pressed
     }
@@ -188,7 +185,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // https://developer.apple.com/documentation/foundation/notification
     
     // MARK: making object to represent MeMe
-    
     // combining image and text
     // grab an image context and let it render the view hierarchy (image & textfields in this case) into a UIImage object.
     func generateMemedImage() -> UIImage {
@@ -211,6 +207,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return memedImage
     }
     
+    // MARK: struct
     // for each individual meme object need struct that includes the following component properties:
     struct Meme {
         var topText: String = ""
@@ -219,17 +216,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         var memedImage: UIImage?
     }
     
+    // MARK: save
     // method that initializes a Meme model object
     func save() {
         
-        // create image
-        let imageView = UIImageView()
+        // get the image from the imagePickerView
+        let imageView = imagePickerView.image // without this let, in let meme just "image: imagePickerView.image"
         
         // create the meme
         let memedImage = generateMemedImage()
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView.image, memedImage: memedImage)
         
-        var memes: [Meme]! // variable to store memes
+        // pack the layers on each other using components from struct set above
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView, memedImage: memedImage)
+        
+        // variable to store memes
+        var memes = [Meme]() // instead of forced unwrap var memes: [Meme]! use as it is now
         memes.append(meme)
         // Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value.
         // Error happens after I close the activityViewController by pressing X, saving picture, or choosing any other option from activityViewcontroller.
