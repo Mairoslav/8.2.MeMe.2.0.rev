@@ -263,5 +263,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 }
 
+/*
+ Sources used:
+ Udacity iOS Nanodegree lessons
+ https://www.codingexplorer.com/choosing-images-with-uiimagepickercontroller-in-swift/
+ https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
+ */
+
 
 
