@@ -30,11 +30,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     let imagePicker = UIImagePickerController() // an instance of UIImagePickerController
     
-    // ???
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     // MARK: view-DidLoad/willAppear/willDisappear
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +95,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             // imagePickerView.contentMode = .scaleAspectFit // fit view, minimized to avoid distortion
             imagePickerView.contentMode = .scaleAspectFill // fit view, clipped to avoid distortion
             imagePickerView.image = pickedImage // sets the image of the UIImageView to be the image we just got pack.
+            
+            // inside didFinishPickingMediaWithInfo we enable the share button to use it
+            shareButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil) // dismiss image picker after xy image is selected
     }
@@ -213,16 +211,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return memedImage
     }
     
+    // for each individual meme object need struct that includes the following component properties:
+    struct Meme {
+        var topText: String = ""
+        var bottomText: String = ""
+        var image: UIImage?
+        var memedImage: UIImage?
+    }
+    
     // method that initializes a Meme model object
     func save() {
-        // Create the meme
+        
+        // create image
         let imageView = UIImageView()
-        // let meme = Meme(topText: <#T##String#>, bottomText: <#T##String#>, image: <#T##UIImage?#>, memedImage: <#T##UIImage?#>)
+        
+        // create the meme
+        let memedImage = generateMemedImage()
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView.image, memedImage: memedImage)
         
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
+        var memes: [Meme]! // variable to store memes
+        memes.append(meme)
+        // Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value.
+        // Error happens after I close the activityViewController by pressing X, saving picture, or choosing any other option from activityViewcontroller.
     }
     
     // MARK: share
@@ -233,15 +243,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // define an instance of ActivityViewController
         let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         
+        // so that iPads won't crash
+        activityVC.popoverPresentationController?.sourceView = self.view
+        
         // pass the ActivityViewController a memedImage as an activity item
         activityVC.completionWithItemsHandler = { activity, success, items, error in
             self.save()
             self.dismiss(animated: true, completion: nil)
         }
+        
         // present the VC
         present(activityVC, animated: true, completion: nil)
     }
-    
+
     // MARK: cancel
     @IBAction func cancel(_ sender: Any) {
         topTextField.text = "top MeMe"
@@ -249,5 +263,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.imagePickerView.image = nil
     }
 }
+
 
 

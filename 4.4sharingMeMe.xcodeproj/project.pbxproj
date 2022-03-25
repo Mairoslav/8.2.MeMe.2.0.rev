@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4417DD1B27ECF4560056C97D /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417DD1A27ECF4560056C97D /* Meme.swift */; };
 		444C1E9B27E67AE000BDE49B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C1E9A27E67AE000BDE49B /* AppDelegate.swift */; };
 		444C1E9D27E67AE000BDE49B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C1E9C27E67AE000BDE49B /* SceneDelegate.swift */; };
 		444C1E9F27E67AE000BDE49B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444C1E9E27E67AE000BDE49B /* ViewController.swift */; };
@@ -17,7 +16,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4417DD1A27ECF4560056C97D /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		444C1E9727E67AE000BDE49B /* 4.4sharingMeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 4.4sharingMeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		444C1E9A27E67AE000BDE49B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		444C1E9C27E67AE000BDE49B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +59,6 @@
 				444C1E9A27E67AE000BDE49B /* AppDelegate.swift */,
 				444C1E9C27E67AE000BDE49B /* SceneDelegate.swift */,
 				444C1E9E27E67AE000BDE49B /* ViewController.swift */,
-				4417DD1A27ECF4560056C97D /* Meme.swift */,
 				444C1EA027E67AE000BDE49B /* Main.storyboard */,
 				444C1EA327E67AE300BDE49B /* Assets.xcassets */,
 				444C1EA527E67AE300BDE49B /* LaunchScreen.storyboard */,
@@ -142,7 +139,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				444C1E9F27E67AE000BDE49B /* ViewController.swift in Sources */,
-				4417DD1B27ECF4560056C97D /* Meme.swift in Sources */,
 				444C1E9B27E67AE000BDE49B /* AppDelegate.swift in Sources */,
 				444C1E9D27E67AE000BDE49B /* SceneDelegate.swift in Sources */,
 			);
