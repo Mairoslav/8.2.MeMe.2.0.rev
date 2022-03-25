@@ -9,25 +9,27 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--EditMemeViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="__4sharingMeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="EditMemeViewController" customClass="EditMemeViewController" customModule="__0meMeV1_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YXP-BJ-zry">
-                                <rect key="frame" x="10" y="15" width="300" height="415"/>
+                                <rect key="frame" x="10" y="20" width="300" height="440"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="left" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="0Jx-xc-mXl" userLabel="toolbarAlbum">
                                 <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <barButtonItem title="album" id="kzy-3z-bfu" userLabel="albumButton">
                                         <inset key="largeContentSizeImageInsets" minX="0.0" minY="100" maxX="0.0" maxY="0.0"/>
                                         <color key="tintColor" systemColor="systemIndigoColor"/>
                                         <connections>
-                                            <action selector="pickAnImageFromAlbum:" destination="BYZ-38-t0r" id="aZB-Bq-7Io"/>
+                                            <action selector="album:" destination="BYZ-38-t0r" id="sFf-hu-kCP"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="egh-hb-SBa"/>
@@ -35,44 +37,47 @@
                                         <imageReference key="image" image="camera" catalog="system" symbolScale="default"/>
                                         <color key="tintColor" systemColor="systemIndigoColor"/>
                                         <connections>
-                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="8Cy-8L-IQq"/>
+                                            <action selector="camera:" destination="BYZ-38-t0r" id="hYM-7j-3Jf"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aO0-iW-1el" userLabel="bottomTextField">
                                 <rect key="frame" x="5" y="386" width="310" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="d1v-vK-TpC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dnU-KC-ohy" userLabel="topTextField">
                                 <rect key="frame" x="5" y="44" width="310" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Rxs-Gt-pq9"/>
                                 </constraints>
+                                <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Rr2-pv-L8C" userLabel="TopNavBar">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem id="nth-4Q-KOD">
+                                        <nil key="title"/>
                                         <barButtonItem key="leftBarButtonItem" title="Item" image="square.and.arrow.up" catalog="system" id="u5K-5P-eo8" userLabel="shareButton">
                                             <color key="tintColor" systemColor="systemIndigoColor"/>
                                             <connections>
-                                                <action selector="share:" destination="BYZ-38-t0r" id="Iin-IB-JZj"/>
+                                                <action selector="share:" destination="BYZ-38-t0r" id="aNU-1d-mYM"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="cancel" id="Lhf-aM-gkT" userLabel="cancelButton">
                                             <color key="tintColor" systemColor="systemIndigoColor"/>
                                             <connections>
-                                                <action selector="cancel:" destination="BYZ-38-t0r" id="HFg-eb-vEP"/>
+                                                <action selector="cancel:" destination="BYZ-38-t0r" id="tPg-2M-hoq"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -89,28 +94,28 @@
                             <constraint firstItem="YXP-BJ-zry" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Brg-ON-Zk7"/>
                             <constraint firstItem="YXP-BJ-zry" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="Hxg-JJ-Yhe"/>
                             <constraint firstItem="0Jx-xc-mXl" firstAttribute="top" secondItem="aO0-iW-1el" secondAttribute="bottom" id="TCi-Uj-PWJ"/>
-                            <constraint firstItem="YXP-BJ-zry" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="WAy-TM-oTr"/>
+                            <constraint firstItem="YXP-BJ-zry" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="WAy-TM-oTr"/>
                             <constraint firstItem="0Jx-xc-mXl" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Wcw-yH-xUF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Jx-xc-mXl" secondAttribute="trailing" id="lkL-tg-Hrs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dnU-KC-ohy" secondAttribute="trailing" constant="5" id="mh0-nS-Tbh"/>
                             <constraint firstItem="dnU-KC-ohy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="o7o-0n-hhM"/>
                             <constraint firstItem="Rr2-pv-L8C" firstAttribute="trailing" secondItem="0Jx-xc-mXl" secondAttribute="trailing" id="qZC-0Z-Tri"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aO0-iW-1el" secondAttribute="trailing" constant="5" id="s63-dJ-J3E"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YXP-BJ-zry" secondAttribute="bottom" constant="50" id="vhF-NN-dZi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YXP-BJ-zry" secondAttribute="bottom" constant="20" id="vhF-NN-dZi"/>
                             <constraint firstItem="Rr2-pv-L8C" firstAttribute="leading" secondItem="0Jx-xc-mXl" secondAttribute="leading" id="w9f-FN-gVZ"/>
                             <constraint firstItem="aO0-iW-1el" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="ynp-YM-Lj9"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="albumButton" destination="kzy-3z-bfu" id="Yg5-gy-Fkl"/>
-                        <outlet property="bottomTextField" destination="aO0-iW-1el" id="NU7-xX-Bs6"/>
-                        <outlet property="cameraButton" destination="QE6-oy-q1B" id="G8Y-Af-bpZ"/>
-                        <outlet property="cancelButton" destination="Lhf-aM-gkT" id="v0m-mr-ysS"/>
-                        <outlet property="imagePickerView" destination="YXP-BJ-zry" id="nDQ-Ue-jt3"/>
-                        <outlet property="shareButton" destination="u5K-5P-eo8" id="XyE-0s-WRL"/>
-                        <outlet property="toolbar" destination="0Jx-xc-mXl" id="UGg-Qe-AmU"/>
-                        <outlet property="topNavBar" destination="Rr2-pv-L8C" id="zjE-wD-4l2"/>
-                        <outlet property="topTextField" destination="dnU-KC-ohy" id="2ip-d2-lQX"/>
+                        <outlet property="albumButton" destination="kzy-3z-bfu" id="bfq-Jw-b6X"/>
+                        <outlet property="bottomTextField" destination="aO0-iW-1el" id="Wqd-nA-XuD"/>
+                        <outlet property="cameraButton" destination="QE6-oy-q1B" id="8SM-3b-TSQ"/>
+                        <outlet property="cancelButton" destination="Lhf-aM-gkT" id="V2v-EW-O6Q"/>
+                        <outlet property="imagePickerView" destination="YXP-BJ-zry" id="dew-PE-rNN"/>
+                        <outlet property="shareButton" destination="u5K-5P-eo8" id="395-ph-lPG"/>
+                        <outlet property="toolbar" destination="0Jx-xc-mXl" id="qgr-z5-6Mm"/>
+                        <outlet property="topNavBar" destination="Rr2-pv-L8C" id="eBw-T2-UMI"/>
+                        <outlet property="topTextField" destination="dnU-KC-ohy" id="Qun-fx-QXD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -121,6 +126,9 @@
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

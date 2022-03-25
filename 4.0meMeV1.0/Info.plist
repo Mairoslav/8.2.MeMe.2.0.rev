@@ -2,12 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleIdentifier</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>reason for accessing the Photo Library: enable the app to display photos from library in UIImageView</string>
-	<key>NSCameraUsageDescription</key>
-	<string>reason for accessing the camera: enable the app to display photo from camera in UIImageView</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>impact.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

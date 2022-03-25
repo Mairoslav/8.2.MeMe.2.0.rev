@@ -1,6 +1,6 @@
 //
-//  ViewController.swift
-//  4.3shiftigTheView
+//  EditMemeViewController.swift
+//  4.0meMeV1.0
 //
 //  Created by mairo on 19/03/2022.
 //
@@ -10,23 +10,22 @@ import UIKit
 // Add two protocols to the class declaration: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 // Add third protocol to the class declaration: UItextFieldDelegate
 
-
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     // MARK: Outlets
-    @IBOutlet weak var imagePickerView: UIImageView! // imagePickerView
+    @IBOutlet weak var imagePickerView: UIImageView!
     
-    @IBOutlet weak var albumButton: UIBarButtonItem! // album
-    @IBOutlet weak var cameraButton: UIBarButtonItem! // camera
+    @IBOutlet weak var albumButton: UIBarButtonItem!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
     
-    @IBOutlet weak var topTextField: UITextField! // top text
-    @IBOutlet weak var bottomTextField: UITextField! // bottom text
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
     
-    @IBOutlet weak var topNavBar: UINavigationBar! // top navigation bar ...
-    @IBOutlet weak var toolbar: UIToolbar! // toolbar ...
+    @IBOutlet weak var topNavBar: UINavigationBar!
+    @IBOutlet weak var toolbar: UIToolbar!
     
-    @IBOutlet weak var shareButton: UIBarButtonItem! // share ...
-    @IBOutlet weak var cancelButton: UIBarButtonItem! // cancel ...
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     let imagePicker = UIImagePickerController() // an instance of UIImagePickerController
     
@@ -68,6 +67,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     // MARK: actions to the buttons to load the UIImagePickerController
     // we’ll call up the UIImagePickerController here
+    /*
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary // an image is coming from the album
@@ -79,6 +79,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.sourceType = .camera // an image is coming from the camera
         present(imagePicker, animated: true, completion: nil)
     }
+    */
+    
+    func pickImage(sourceType: UIImagePickerController.SourceType) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = sourceType
+        present(imagePicker, animated: true, completion: nil)
+        }
+    
+    @IBAction func album(_ sender: Any) {
+        pickImage(sourceType: .photoLibrary)
+    }
+    
+    @IBAction func camera(_ sender: Any) {
+        pickImage(sourceType: .camera)
+    }
+    
     
     // MARK: - UIImagePickerControllerDelegate Method I.
     // to read the Image Picked from UIImagePickerController - so that selected picture appears in UIImageView
@@ -126,7 +142,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let textStyle: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 35)!,
+            NSAttributedString.Key.font: UIFont(name: "Impact", size: 35)!,
             NSAttributedString.Key.strokeWidth: -4]
                 as [NSAttributedString.Key : Any]
         
@@ -146,7 +162,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @objc func keybordWillShow(_ notification: Notification) {
         // To move the view up above the keybord, frame view is reduced by the height of keybord vs original vertical position (y)
         if bottomTextField.isFirstResponder {
-                    view.frame.origin.y = getKeyboardHeight(notification) * (-1)
+                    // view.frame.origin.y = getKeyboardHeight(notification) * (-1)
+                    view.frame.origin.y = -getKeyboardHeight(notification)
                 }
     }
     
@@ -207,15 +224,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return memedImage
     }
     
-    // MARK: struct
-    // for each individual meme object need struct that includes the following component properties:
-    struct Meme {
-        var topText: String = ""
-        var bottomText: String = ""
-        var image: UIImage?
-        var memedImage: UIImage?
-    }
-    
     // MARK: save
     // method that initializes a Meme model object
     func save() {
@@ -246,15 +254,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         activityVC.popoverPresentationController?.sourceView = self.view
         
         // pass the ActivityViewController a memedImage as an activity item
+        // when sharing the meme, the save function must not be called if the user decides to cancel the activity view. Therefore adding an if statement here checking the success property.
         activityVC.completionWithItemsHandler = { activity, success, items, error in
-            self.save()
-            self.dismiss(animated: true, completion: nil)
+            if success {
+                self.save()
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
-        
         // present the VC
         present(activityVC, animated: true, completion: nil)
     }
-
+    
     // MARK: cancel
     @IBAction func cancel(_ sender: Any) {
         topTextField.text = "top MeMe"
@@ -268,6 +279,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
  Udacity iOS Nanodegree lessons
  https://www.codingexplorer.com/choosing-images-with-uiimagepickercontroller-in-swift/
  https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
+ https://sarunw.com/posts/how-to-add-custom-fonts-to-ios-app/
  */
 
 

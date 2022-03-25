@@ -6,9 +6,8 @@
 //
 
 import UIKit
-// Thread 1: "UIPopoverPresentationController (<UIPopoverPresentationController: 0x142e0dec0>) should have a non-nil sourceView or barButtonItem set before the presentation occurs."
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+
+@main class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
