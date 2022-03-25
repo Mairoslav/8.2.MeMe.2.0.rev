@@ -232,8 +232,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // variable to store memes
         var memes = [Meme]() // instead of forced unwrap var memes: [Meme]! use as it is now
         memes.append(meme)
-        // Thread 1: Fatal error: Unexpectedly found nil while implicitly unwrapping an Optional value.
-        // Error happens after I close the activityViewController by pressing X, saving picture, or choosing any other option from activityViewcontroller.
     }
     
     // MARK: share
