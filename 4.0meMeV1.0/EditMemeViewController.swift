@@ -49,38 +49,23 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // disable the camera button in cases when this bool returns false for the camera sourceType
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         // call subscribeToKeybordNotifications() method in viewWillAppear
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
         
-        // if there's an image in the imageView, enable the share button
-        if let _ = imagePickerView.image {
-            shareButton.isEnabled = true
-        } else {
-            shareButton.isEnabled = false
-        }
+        // if there's not yet image in the imageView, disable the share button
+        shareButton.isEnabled = false
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // call unsubscribeToKeybordNotifications() method in viewWillDissappear
-        self.unsubscribeFromKeybordNotification()
+        unsubscribeFromKeybordNotification()
     }
 
     // MARK: actions to the buttons to load the UIImagePickerController
     // we’ll call up the UIImagePickerController here
-    /*
-    @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary // an image is coming from the album
-        present(imagePicker, animated: true, completion: nil)
-    }
     
-    @IBAction func pickAnImageFromCamera(_ sender: Any) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .camera // an image is coming from the camera
-        present(imagePicker, animated: true, completion: nil)
-    }
-    */
-    
+    // creating this reusable method, one that is repeated for album and camera @IBActions methods
     func pickImage(sourceType: UIImagePickerController.SourceType) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = sourceType
@@ -94,7 +79,6 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func camera(_ sender: Any) {
         pickImage(sourceType: .camera)
     }
-    
     
     // MARK: - UIImagePickerControllerDelegate Method I.
     // to read the Image Picked from UIImagePickerController - so that selected picture appears in UIImageView
@@ -110,7 +94,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             imagePickerView.contentMode = .scaleAspectFill // fit view, clipped to avoid distortion
             imagePickerView.image = pickedImage // sets the image of the UIImageView to be the image we just got pack.
             
-            // inside didFinishPickingMediaWithInfo we enable the share button to use it
+            // inside didFinishPickingMediaWithInfo we enable the share button to use it i.e. once we have picture we enable share button
             shareButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil) // dismiss image picker after xy image is selected
@@ -188,6 +172,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // argument of '#selector' refers to instance method 'keybordWillShow' that is not exposed to Objective-C
         // add '@objc' to expose this instance method to Objective-C
         // NotificationCenter.default.addObserver(<#T##observer: Any##Any#>, selector: <#T##Selector#>, name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keybordWillShow(_: )), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -195,8 +180,10 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: unsubscribe
     func unsubscribeFromKeybordNotification() {
         // NotificationCenter.default.removeObserver(<#T##observer: Any##Any#>, name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        // can remove two observers at once like this:
+        // NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        // NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self)
     }
     // Every iOS program has one default NotificationCenter, NotificationCenter.default which comes with a number of useful stock notifications, like .UIKeyboardWillShow
     // https://developer.apple.com/documentation/foundation/notification
@@ -244,6 +231,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // MARK: share
     @IBAction func share(_ sender: Any) {
+        
         // generate memed image
         let memedImage = generateMemedImage()
         
@@ -271,6 +259,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         topTextField.text = "top MeMe"
         bottomTextField.text = "bottom MeMe"
         self.imagePickerView.image = nil
+        shareButton.isEnabled = false // no picture no share button
     }
 }
 
