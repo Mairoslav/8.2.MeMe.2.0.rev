@@ -52,7 +52,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         subscribeToKeyboardNotifications()
         
         // if there's not yet image in the imageView, disable the share button
-        shareButton.isEnabled = false
+        // shareButton.isEnabled = false
         
     }
     
@@ -227,6 +227,11 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // variable to store memes
         var memes = [Meme]() // instead of forced unwrap var memes: [Meme]! use as it is now
         memes.append(meme)
+        
+        // add the meme to the memes array in the AppDelegate.swift
+        let object = UIApplication.shared.delegate // new
+        let appDelegate = object as! AppDelegate // new
+        appDelegate.memes.append(meme) // new
     }
     
     // MARK: share
