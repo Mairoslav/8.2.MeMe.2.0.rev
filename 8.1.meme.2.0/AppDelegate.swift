@@ -13,8 +13,8 @@ import UIKit
     
     // MARK: Properties
     
-    var window: UIWindow? // new
-    var memes = [Meme]() // new
+    var window: UIWindow? // new 2.0
+    var memes = [Meme]() // new 2.0
     
     // MARK: UIApplicationDelegate
 

@@ -45,6 +45,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
         
         // disable the camera button in cases when this bool returns false for the camera sourceType
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -222,16 +223,16 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         let memedImage = generateMemedImage()
         
         // pack the layers on each other using components from struct set above
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView, memedImage: memedImage)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView, memedImage: memedImage) // new 2.0
         
         // variable to store memes
         var memes = [Meme]() // instead of forced unwrap var memes: [Meme]! use as it is now
         memes.append(meme)
         
         // add the meme to the memes array in the AppDelegate.swift
-        let object = UIApplication.shared.delegate // new
-        let appDelegate = object as! AppDelegate // new
-        appDelegate.memes.append(meme) // new
+        let object = UIApplication.shared.delegate // new 2.0
+        let appDelegate = object as! AppDelegate // new 2.0
+        appDelegate.memes.append(meme) // new 2.0
     }
     
     // MARK: share

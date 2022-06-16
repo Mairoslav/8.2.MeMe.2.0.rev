@@ -13,8 +13,14 @@ import UIKit // have to import UIKit, otherwise Error: "Cannot find type 'UIImag
 // for each individual meme object need struct that includes the following component properties:
 
 struct Meme {
+    
+    // MARK: properties
+    
     var topText: String = ""
     var bottomText: String = ""
     var image: UIImage?
     var memedImage: UIImage?
+    
+    // static let TopTextKey = "TopTextKey" ...
+    
 }
