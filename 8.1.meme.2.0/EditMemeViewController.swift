@@ -27,7 +27,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    let imagePicker = UIImagePickerController() // an instance of UIImagePickerController
+    var imagePicker = UIImagePickerController() // an instance of UIImagePickerController
     
     // MARK: view-DidLoad/willAppear/willDisappear
     override func viewDidLoad() {

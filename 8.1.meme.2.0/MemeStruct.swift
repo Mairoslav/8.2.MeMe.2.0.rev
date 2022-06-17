@@ -21,6 +21,4 @@ struct Meme {
     var image: UIImage?
     var memedImage: UIImage?
     
-    // static let TopTextKey = "TopTextKey" ...
-    
 }

@@ -45,7 +45,7 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
         // memes will be stored in meme's array, this method returns the number of memes in that array
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.allMemes.count
+        return self.memes.count
     } // new 2.0
     
     // MARK: 2. collectionView(_:cellForItemAt:)
@@ -54,12 +54,12 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionViewCell", for: indexPath) as! MemeCollectionViewCell
-        let meme = self.allMemes[(indexPath as NSIndexPath).row] // see Villain.swift file, originally here was ... let villain = ... self.allVillains ... try it
+        let meme = self.memes[(indexPath as NSIndexPath).row]
         
         // Set the name and image
         
-        // cell.nameLabel.text = meme.name
-        cell.memeImageView?.image = UIImage(named: meme.imageName)
+        // cell.nameLabel.text = meme.topText // + meme.bottomText // add nameLabel under UIImage
+        cell.memeImageView?.image = meme.memedImage // UIImage(named: meme.memedImage)
         
         return cell
     }
