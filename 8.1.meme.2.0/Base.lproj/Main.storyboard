@@ -10,13 +10,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--CollectionNC-->
+        <!--CollectionNavigationController-->
         <scene sceneID="tb8-Bd-FLT">
             <objects>
-                <navigationController id="UhN-O8-Tzw" userLabel="CollectionNC" sceneMemberID="viewController">
+                <navigationController title="CollectionNavigationController" id="UhN-O8-Tzw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Collection" image="square.grid.3x3.fill" catalog="system" id="aFI-5u-J2p"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9WB-0G-5wV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -27,31 +27,31 @@
             </objects>
             <point key="canvasLocation" x="-1656" y="-591"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--TabBarController-InitialController-->
         <scene sceneID="CEp-oh-Ru5">
             <objects>
-                <tabBarController id="OYi-oQ-EGf" sceneMemberID="viewController">
+                <tabBarController title="TabBarController-InitialController" id="OYi-oQ-EGf" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WrW-qW-LM5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="UhN-O8-Tzw" kind="relationship" relationship="viewControllers" id="w6P-g1-Bwl"/>
-                        <segue destination="QL7-yh-Nz5" kind="relationship" relationship="viewControllers" id="3y1-gi-gCj"/>
+                        <segue destination="QL7-yh-Nz5" kind="relationship" relationship="viewControllers" id="1gW-TU-Lmb"/>
+                        <segue destination="UhN-O8-Tzw" kind="relationship" relationship="viewControllers" id="BS9-RO-Qud"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9z-2b-XMv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2574" y="-158"/>
         </scene>
-        <!--TableNC-->
+        <!--TableNavigationController-->
         <scene sceneID="GLz-QN-VLM">
             <objects>
-                <navigationController id="QL7-yh-Nz5" userLabel="TableNC" sceneMemberID="viewController">
+                <navigationController title="TableNavigationController" id="QL7-yh-Nz5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Table" image="list.dash" catalog="system" id="gtd-ei-zaO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d63-qF-ih1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -65,27 +65,30 @@
         <!--Memes-->
         <scene sceneID="bIt-Oa-xUW">
             <objects>
-                <tableViewController title="Memes" id="FOd-Vg-xCf" sceneMemberID="viewController">
+                <tableViewController id="FOd-Vg-xCf" customClass="MemeTableViewController" customModule="__1_meme_2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Hby-LJ-d56">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeCell" id="ItV-6P-rfV">
-                                <rect key="frame" x="0.0" y="44.5" width="320" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeCell" rowHeight="122" id="ItV-6P-rfV" customClass="SelfSizingTableViewCell" customModule="__1_meme_2_0" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="320" height="122"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ItV-6P-rfV" id="OHz-iJ-2kp">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="122"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFr-0G-UXj">
-                                            <rect key="frame" x="16" y="6" width="33" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TopBottomText" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFr-0G-UXj" userLabel="TopBottomText">
+                                            <rect key="frame" x="76" y="5.5" width="228" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="EFr-0G-UXj" secondAttribute="trailing" id="9nE-ZN-vIZ"/>
+                                        <constraint firstItem="EFr-0G-UXj" firstAttribute="top" secondItem="OHz-iJ-2kp" secondAttribute="top" id="gvu-39-S92"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableViewCell>
@@ -96,7 +99,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Memes" id="vmM-lT-aUY">
-                        <barButtonItem key="rightBarButtonItem" title="addNewMemeButton" image="plus.rectangle.on.rectangle.fill" catalog="system" id="qcZ-VD-v4f">
+                        <barButtonItem key="rightBarButtonItem" title="addNewMemeButton" image="plus.square.on.square.fill" catalog="system" id="qcZ-VD-v4f">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" id="Yiz-iQ-S99"/>
                             </connections>
@@ -105,7 +108,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exb-aL-NHf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-756" y="325"/>
+            <point key="canvasLocation" x="-757.5" y="325"/>
         </scene>
         <!--Memes-->
         <scene sceneID="h2n-fp-GDk">
@@ -116,32 +119,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bA5-va-tak">
-                            <size key="itemSize" width="128" height="128"/>
+                            <size key="itemSize" width="261" height="171"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MemeCollectionViewCell" id="YbE-YR-xWO" customClass="MemeCollectionViewCell" customModule="__1_meme_2_0" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <rect key="frame" x="29.5" y="0.0" width="261" height="171"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jXc-ke-6n8">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="261" height="171"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6ky-VF-cOW" userLabel="Meme Image View">
-                                            <rect key="frame" x="24" y="31.5" width="80" height="65"/>
+                                            <rect key="frame" x="5" y="0.0" width="251" height="171"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="65" id="el7-zW-qv5"/>
-                                                <constraint firstAttribute="width" constant="80" id="xtg-CX-AJS"/>
+                                                <constraint firstAttribute="height" constant="170" id="el7-zW-qv5"/>
+                                                <constraint firstAttribute="width" constant="96" id="xtg-CX-AJS"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="6ky-VF-cOW" firstAttribute="centerX" secondItem="jXc-ke-6n8" secondAttribute="centerX" id="DYd-mU-wrG"/>
+                                        <constraint firstItem="6ky-VF-cOW" firstAttribute="leading" secondItem="jXc-ke-6n8" secondAttribute="leading" constant="5" id="hDZ-2K-U5f"/>
+                                        <constraint firstItem="6ky-VF-cOW" firstAttribute="top" secondItem="jXc-ke-6n8" secondAttribute="top" id="jND-7c-JVv"/>
+                                        <constraint firstAttribute="trailing" secondItem="6ky-VF-cOW" secondAttribute="trailing" constant="5" id="qvg-Mk-nNn"/>
                                         <constraint firstItem="6ky-VF-cOW" firstAttribute="centerY" secondItem="jXc-ke-6n8" secondAttribute="centerY" id="ypc-BC-Ibe"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="261" height="171"/>
                                 <connections>
                                     <outlet property="memeImageView" destination="6ky-VF-cOW" id="TDa-ac-aaa"/>
                                 </connections>
@@ -153,7 +160,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Memes" id="ThY-Da-Anh" colorLabel="IBBuiltInLabel-Red">
-                        <barButtonItem key="rightBarButtonItem" title="addNewMemeButton" image="plus.rectangle.on.rectangle.fill" catalog="system" id="5Zh-t2-aZ8">
+                        <barButtonItem key="rightBarButtonItem" title="addNewMemeButton" image="plus.square.on.square.fill" catalog="system" id="5Zh-t2-aZ8">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" id="XAN-Kn-SI8"/>
                             </connections>
@@ -162,12 +169,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pb0-hZ-AVj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-754" y="-591"/>
+            <point key="canvasLocation" x="-755.625" y="-591.25"/>
         </scene>
         <!--EditMemeViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="EditMemeViewController" customClass="EditMemeViewController" customModule="__1_meme_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditMemeViewController" id="BYZ-38-t0r" userLabel="EditMemeViewController" customClass="EditMemeViewController" customModule="__1_meme_2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -285,7 +292,7 @@
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
-        <image name="plus.rectangle.on.rectangle.fill" catalog="system" width="128" height="97"/>
+        <image name="plus.square.on.square.fill" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="square.grid.3x3.fill" catalog="system" width="128" height="112"/>
         <systemColor name="opaqueSeparatorColor">

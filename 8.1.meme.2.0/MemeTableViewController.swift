@@ -5,27 +5,48 @@
 //  Created by mairo on 18/06/2022.
 //
 
-import UIKit
+import UIKit // whole file MemeTableViewController.swift new 2.0
 
-// MARK: - ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+// MARK: - MemeTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITableViewController (this originally in example)
 
-class MemeTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+// MARK: - UITableViewController (only this used here + had to use keyword "override" for func(s) tableView(_ ...))
+
+class MemeTableViewController: UITableViewController {
     
     var memes: [Meme]! {
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         return appDelegate.memes
+    } // vs. MemeCollectionViewController here alternative - a computed property to achieve the same result - to access the array stored in the App Delegate to populate both the collection and the table view controllers
+    
+    // MARK: viewDidLoad()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    // MARK: reload the table view whenever it appears so memes can be displayed
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        // memes = appDelegate.memes // not here because using computed property above
+        tableView!.reloadData()
     }
     
     // MARK: Table View Data Source
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // MARK: 1. tableView(_:numberOfRowsInSection:)
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.memes.count
         
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // MARK: 2. tableView(_:cellForRowAt:)
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemeCell")
         let meme = self.memes[(indexPath as NSIndexPath).row]
@@ -37,8 +58,14 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
         
         cell?.imageView?.image = meme.memedImage
         
-        return cell! // How to coalesce using '??' to provide a default when the optional value contains 'nil' in this case? To avoid force unwrap.
+        cell?.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 117
+        
+        return cell ?? UITableViewCell() // To avoid force unwrap coalesce using '??' to provide a default when the optional value contains 'nil' - would be UITableViewCell()
         
     }
     
 }
+

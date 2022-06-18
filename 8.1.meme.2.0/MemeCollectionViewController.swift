@@ -17,7 +17,7 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
     
     var memes: [Meme] = [] // need to change the array from [AnyObject] to [Meme]
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    // memes = appDelegate.memes // cannot set properties in the class scope, you need to do it inside a method or a closure. You can only do that for computed properties. To fix the issue you need to set memes in viewDidLoad - see meme = appDelegate.memes in last func below viewDidLoad() 
+    // memes = appDelegate.memes // cannot set properties in the class scope, you need to do it inside a method or a closure. You can only do that for computed properties. To fix the issue you need to set memes in viewWillAppear()
     
     // Alternately, a computed property can achieve the same result.
     /*
@@ -27,15 +27,14 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
         return appDelegate.memes
     }
     */
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        memes = appDelegate.memes // new 2.0 "set it to the memes array from the AppDelegate"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        memes = appDelegate.memes // new 2.0 "set it to the memes array from the AppDelegate"
         collectionView!.reloadData() // new 2.0
     } // new 2.0
     
