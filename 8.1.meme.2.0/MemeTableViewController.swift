@@ -7,6 +7,13 @@
 
 import UIKit // whole file MemeTableViewController.swift new 2.0
 
+// MARK: create a custom table view cell 
+
+class MemeTableViewCell: UITableViewCell {
+    @IBOutlet weak var memeTitleLabel: UILabel!
+    @IBOutlet weak var memeImageView: UIImageView!
+}
+
 // MARK: - MemeTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITableViewController (this originally in example)
 
 // MARK: - UITableViewController (only this used here + had to use keyword "override" for func(s) tableView(_ ...))
@@ -44,8 +51,24 @@ class MemeTableViewController: UITableViewController {
         
     }
     
-        // MARK: 2. tableView(_:cellForRowAt:)
+        // MARK: 2.a tableView(_:cellForRowAt:) integrating custom table view cell
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeCell", for: indexPath) as! MemeTableViewCell
+        let meme = self.memes[(indexPath as NSIndexPath).row]
+        
+        // Set the name and image
+        
+        // cell.nameLabel.text = meme.topText // + meme.bottomText // add nameLabel under UIImage
+        
+        cell.memeImageView?.image = meme.memedImage
+        cell.memeTitleLabel?.text = meme.topText + " " + meme.bottomText
+        
+        return cell
+    
+        // MARK: 2.b tableView(_:cellForRowAt:) with default table view cell
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemeCell")
@@ -58,14 +81,10 @@ class MemeTableViewController: UITableViewController {
         
         cell?.imageView?.image = meme.memedImage
         
-        cell?.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
-        
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 117
-        
         return cell ?? UITableViewCell() // To avoid force unwrap coalesce using '??' to provide a default when the optional value contains 'nil' - would be UITableViewCell()
-        
+        */
     }
     
 }
+
 

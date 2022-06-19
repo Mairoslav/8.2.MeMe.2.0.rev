@@ -275,6 +275,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
  https://www.codingexplorer.com/choosing-images-with-uiimagepickercontroller-in-swift/
  https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
  https://sarunw.com/posts/how-to-add-custom-fonts-to-ios-app/
+ https://www.codingexplorer.com/segue-swift-view-controllers
+ https://www.ralfebert.com/ios-examples/uikit/uitableviewcontroller/custom-cells
  */
 
 
