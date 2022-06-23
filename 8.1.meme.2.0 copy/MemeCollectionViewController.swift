@@ -29,6 +29,9 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
     */
     override func viewDidLoad() {
         super.viewDidLoad()
+        // collectionView.dataSource = self
+        collectionView.delegate = self // new 2.0 collectionConstraints
+        collectionView.collectionViewLayout = UICollectionViewFlowLayout() // new 2.0 collectionConstraints
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +56,7 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionViewCell", for: indexPath) as! MemeCollectionViewCell
+        
         let meme = self.memes[(indexPath as NSIndexPath).row]
         
         // Set the name and image
@@ -63,5 +67,14 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
         return cell
     }
     
+    // MARK: collectionConstraints
+    
+    func collectionView(_ collectionWiew: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: 20, height: 20)
+        
+    }
+    
 }
+
 

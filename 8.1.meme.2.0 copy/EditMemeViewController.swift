@@ -110,7 +110,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: Text Field Delegate
     // when a user taps inside the textfiels the default text should clear
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.text == "top MeMe" || textField.text == "bottom MeMe" {
+        if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
         }
     }
@@ -131,8 +131,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             NSAttributedString.Key.strokeWidth: -4]
                 as [NSAttributedString.Key : Any]
         
-        topTextField.attributedPlaceholder = NSAttributedString(string: "top MeMe", attributes: textStyle)
-               bottomTextField.attributedPlaceholder = NSAttributedString(string: "bottom MeMe", attributes: textStyle)
+        topTextField.attributedPlaceholder = NSAttributedString(string: "TOP", attributes: textStyle)
+               bottomTextField.attributedPlaceholder = NSAttributedString(string: "BOTTOM", attributes: textStyle)
                textField.textAlignment = .center
                textField.delegate = self
         
@@ -252,6 +252,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         activityVC.completionWithItemsHandler = { activity, success, items, error in
             if success {
                 self.save()
+                self.dismiss(animated: true, completion: nil)
             } else {
                 self.dismiss(animated: true, completion: nil)
             }
@@ -262,8 +263,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // MARK: cancel
     @IBAction func cancel(_ sender: Any) {
-        topTextField.text = "top MeMe"
-        bottomTextField.text = "bottom MeMe"
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
         self.imagePickerView.image = nil
         shareButton.isEnabled = false // no picture no share button
     }
@@ -277,6 +278,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
  https://sarunw.com/posts/how-to-add-custom-fonts-to-ios-app/
  https://www.codingexplorer.com/segue-swift-view-controllers
  https://www.ralfebert.com/ios-examples/uikit/uitableviewcontroller/custom-cells
+ https://www.youtube.com/watch?v=aU_kTzMZHQ8
  */
 
 

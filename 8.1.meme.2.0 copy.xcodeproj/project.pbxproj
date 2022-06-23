@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		444C1E9727E67AE000BDE49B /* 8.1.meme.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 8.1.meme.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		444C1E9727E67AE000BDE49B /* 8.1.meme.2.0 copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "8.1.meme.2.0 copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		444C1E9A27E67AE000BDE49B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		444C1E9C27E67AE000BDE49B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		444C1E9E27E67AE000BDE49B /* EditMemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemeViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		444C1E8E27E67AE000BDE49B = {
 			isa = PBXGroup;
 			children = (
-				444C1E9927E67AE000BDE49B /* 8.1.meme.2.0 */,
+				444C1E9927E67AE000BDE49B /* 8.1.meme.2.0 copy */,
 				444C1E9827E67AE000BDE49B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,12 +58,12 @@
 		444C1E9827E67AE000BDE49B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				444C1E9727E67AE000BDE49B /* 8.1.meme.2.0.app */,
+				444C1E9727E67AE000BDE49B /* 8.1.meme.2.0 copy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		444C1E9927E67AE000BDE49B /* 8.1.meme.2.0 */ = {
+		444C1E9927E67AE000BDE49B /* 8.1.meme.2.0 copy */ = {
 			isa = PBXGroup;
 			children = (
 				444C1E9A27E67AE000BDE49B /* AppDelegate.swift */,
@@ -79,15 +79,15 @@
 				444C1EA327E67AE300BDE49B /* Assets.xcassets */,
 				444C1EA827E67AE300BDE49B /* Info.plist */,
 			);
-			path = 8.1.meme.2.0;
+			path = "8.1.meme.2.0 copy";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		444C1E9627E67AE000BDE49B /* 8.1.meme.2.0 */ = {
+		444C1E9627E67AE000BDE49B /* 8.1.meme.2.0 copy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 444C1EAB27E67AE300BDE49B /* Build configuration list for PBXNativeTarget "8.1.meme.2.0" */;
+			buildConfigurationList = 444C1EAB27E67AE300BDE49B /* Build configuration list for PBXNativeTarget "8.1.meme.2.0 copy" */;
 			buildPhases = (
 				444C1E9327E67AE000BDE49B /* Sources */,
 				444C1E9427E67AE000BDE49B /* Frameworks */,
@@ -97,9 +97,9 @@
 			);
 			dependencies = (
 			);
-			name = 8.1.meme.2.0;
+			name = "8.1.meme.2.0 copy";
 			productName = 4.1imagePicker;
-			productReference = 444C1E9727E67AE000BDE49B /* 8.1.meme.2.0.app */;
+			productReference = 444C1E9727E67AE000BDE49B /* 8.1.meme.2.0 copy.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -117,7 +117,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 444C1E9227E67AE000BDE49B /* Build configuration list for PBXProject "8.1.meme.2.0" */;
+			buildConfigurationList = 444C1E9227E67AE000BDE49B /* Build configuration list for PBXProject "8.1.meme.2.0 copy" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -130,7 +130,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				444C1E9627E67AE000BDE49B /* 8.1.meme.2.0 */,
+				444C1E9627E67AE000BDE49B /* 8.1.meme.2.0 copy */,
 			);
 		};
 /* End PBXProject section */
@@ -309,7 +309,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BFXL43VVT7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = 8.1.meme.2.0/Info.plist;
+				INFOPLIST_FILE = "8.1.meme.2.0 copy/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "reason for accessing the camera: enable the app to display photo from camera in UIImageView";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "reason for accessing the Photo Library: enable the app to display photos from library in UIImageView";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -339,7 +339,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BFXL43VVT7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = 8.1.meme.2.0/Info.plist;
+				INFOPLIST_FILE = "8.1.meme.2.0 copy/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "reason for accessing the camera: enable the app to display photo from camera in UIImageView";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "reason for accessing the Photo Library: enable the app to display photos from library in UIImageView";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -363,7 +363,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		444C1E9227E67AE000BDE49B /* Build configuration list for PBXProject "8.1.meme.2.0" */ = {
+		444C1E9227E67AE000BDE49B /* Build configuration list for PBXProject "8.1.meme.2.0 copy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				444C1EA927E67AE300BDE49B /* Debug */,
@@ -372,7 +372,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		444C1EAB27E67AE300BDE49B /* Build configuration list for PBXNativeTarget "8.1.meme.2.0" */ = {
+		444C1EAB27E67AE300BDE49B /* Build configuration list for PBXNativeTarget "8.1.meme.2.0 copy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				444C1EAC27E67AE300BDE49B /* Debug */,
