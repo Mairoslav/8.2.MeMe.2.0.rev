@@ -203,7 +203,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         
         //Hide Toolbar And Navigation Bar
         // topNavBar.isHidden = true
-        // toolbar.isHidden = true
+        toolbar.isHidden = true
         
         // render view to an image
         UIGraphicsBeginImageContext(self.imagePickerView.frame.size) // .frame away
