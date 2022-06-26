@@ -198,22 +198,19 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: making object to represent MeMe
     // combining image and text
     // grab an image context and let it render the view hierarchy (image & textfields in this case) into a UIImage object.
+    
     func generateMemedImage() -> UIImage {
         
         //Hide Toolbar And Navigation Bar
-        topNavBar.isHidden = true
-        toolbar.isHidden = true
+        // topNavBar.isHidden = true
+        // toolbar.isHidden = true
         
         // render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(self.imagePickerView.frame.size) // .frame away
+        view.drawHierarchy(in: self.imagePickerView.frame, afterScreenUpdates: true)
         
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        
-        //Show Toolbar and Navigation Bar
-        topNavBar.isHidden = false
-        toolbar.isHidden = false
         
         return memedImage
     }
@@ -285,6 +282,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
  https://www.codingexplorer.com/segue-swift-view-controllers
  https://www.ralfebert.com/ios-examples/uikit/uitableviewcontroller/custom-cells
  https://www.youtube.com/watch?v=aU_kTzMZHQ8
+ https://developer.apple.com/documentation/uikit/uitableviewdelegate/1614998-tableview
+ https://gist.github.com/RNHTTR/417f92e628ef6b300742dd8af94b206f
  */
 
 

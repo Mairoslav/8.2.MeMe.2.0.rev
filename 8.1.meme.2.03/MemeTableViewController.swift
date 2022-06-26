@@ -38,8 +38,8 @@ class MemeTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
         // memes = appDelegate.memes // not here because using computed property above
-        tableView.contentSize.height = 140 // new 2.0
-        tableView!.reloadData() // new 2.0
+        // tableView.contentSize.height = 140
+        tableView.reloadData() // new 2.0
     }
     
     // MARK: Table View Data Source
@@ -84,6 +84,14 @@ class MemeTableViewController: UITableViewController {
         
         return cell ?? UITableViewCell() // To avoid force unwrap coalesce using '??' to provide a default when the optional value contains 'nil' - would be UITableViewCell()
         */
+    }
+    
+        // MARK: tableView(_:heightForRowAt:)
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 130
+        
     }
     
 }
