@@ -132,9 +132,15 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
                 as [NSAttributedString.Key : Any]
         
         topTextField.attributedPlaceholder = NSAttributedString(string: "TOP", attributes: textStyle)
-               bottomTextField.attributedPlaceholder = NSAttributedString(string: "BOTTOM", attributes: textStyle)
-               textField.textAlignment = .center
-               textField.delegate = self
+        bottomTextField.attributedPlaceholder = NSAttributedString(string: "BOTTOM", attributes: textStyle)
+        
+        // textField.layer.borderWidth = 0
+        // textField.layer.borderColor = UIColor.clear.cgColor
+        // ↪ no, go identity inspector/Border style/none or code below
+        textField.borderStyle = UITextField.BorderStyle.none
+        
+        textField.textAlignment = .center
+        textField.delegate = self
         
         textField.defaultTextAttributes = textStyle
         textField.textAlignment = NSTextAlignment.center

@@ -29,10 +29,11 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
     */
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-        collectionView.delegate = self // new 2.0 collectionConstraints
-        collectionView.collectionViewLayout = UICollectionViewFlowLayout() // new 2.0 collectionConstraints
-         */
+        
+        // new 2.0 collectionConstraints
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 118, height: 118)
+        collectionView.collectionViewLayout = layout
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +41,7 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
         self.tabBarController?.tabBar.isHidden = false
         memes = appDelegate.memes // new 2.0 "set it to the memes array from the AppDelegate"
         collectionView!.reloadData() // new 2.0
-    } // new 2.0
+    }
     
     // MARK: Collection View Data Source
     
@@ -68,14 +69,6 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
         return cell
     }
     
-    // MARK: collectionConstraints
-    /*
-    func collectionView(_ collectionWiew: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 100, height: 100)
-        
-    }
-    */
 }
 
 

@@ -38,7 +38,8 @@ class MemeTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
         // memes = appDelegate.memes // not here because using computed property above
-        tableView!.reloadData()
+        tableView.contentSize.height = 140 // new 2.0
+        tableView!.reloadData() // new 2.0
     }
     
     // MARK: Table View Data Source
