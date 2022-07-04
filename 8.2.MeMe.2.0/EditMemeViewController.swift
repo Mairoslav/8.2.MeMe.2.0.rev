@@ -27,6 +27,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    var savedMemeForEdit: Meme? // to enable edit saved meme in detail view
+    
     var imagePicker = UIImagePickerController() // an instance of UIImagePickerController
     
     // MARK: view-DidLoad/willAppear/willDisappear
@@ -54,6 +56,13 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         
         // if there's not yet image in the imageView, disable the share button
         // shareButton.isEnabled = false
+        
+        if let memeFromDetail = savedMemeForEdit as Meme? {
+            // imagePickerView.image = memeFromDetail.image
+            // imagePickerView.image = memeFromDetail.memedImage
+            self.imagePickerView.image = memeFromDetail.image
+            
+        }
         
     }
     
@@ -202,12 +211,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     func generateMemedImage() -> UIImage {
         
         //Hide Toolbar And Navigation Bar
-        // topNavBar.isHidden = true
+        topNavBar.isHidden = true
         toolbar.isHidden = true
         
         // render view to an image
-        UIGraphicsBeginImageContext(self.imagePickerView.frame.size) // .frame away
-        view.drawHierarchy(in: self.imagePickerView.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
@@ -270,7 +279,9 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         bottomTextField.text = "BOTTOM"
         self.imagePickerView.image = nil
         shareButton.isEnabled = false // no picture no share button
+        dismiss(animated: true, completion: nil) // new 2.0 cancel button to return to the Sent Memes View
     }
+    
 }
 
 /*
@@ -284,6 +295,9 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
  https://www.youtube.com/watch?v=aU_kTzMZHQ8
  https://developer.apple.com/documentation/uikit/uitableviewdelegate/1614998-tableview
  https://gist.github.com/RNHTTR/417f92e628ef6b300742dd8af94b206f
+ https://stackoverflow.com/questions/26390072/how-to-remove-border-of-the-navigationbar-in-swift
+ https://www.hackingwithswift.com/example-code/uikit/how-to-swipe-to-delete-uitableviewcells
+ https://www.youtube.com/watch?v=F6dgdJCFS1Q
  */
 
 

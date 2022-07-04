@@ -69,6 +69,31 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
         return cell
     }
     
+    // MARK: display meme detail
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+        detailController.meme = self.memes[indexPath.item]
+        self.navigationController!.pushViewController(detailController, animated: true)
+    }
+    
+    
+    
+    
+    /*
+    @IBAction func selectAllA(_ sender: Any) { 
+            memes.removeAll()
+            memes.removeAll()
+
+            for (index, element) in self.memes.enumerated() { // append only item of array, so adjust for (index, element), no dictionary, but array...
+                memes.append(Meme(item: index, section: 0)) // append only item of array
+                memes.append(element)
+            }
+
+            collectionView.reloadData()
+            print(memes)
+        }
+    */
 }
 
 
