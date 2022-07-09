@@ -74,7 +74,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         */
         
-        // if (savedMemeForEdit != nil) {
+        // if (savedMemeForEdit != nil) { ...
     
         // setupEditor()
         
@@ -291,6 +291,15 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // add the meme to the memes array in the AppDelegate.swift
         let object = UIApplication.shared.delegate // new 2.0
         let appDelegate = object as! AppDelegate // new 2.0
+        
+        /*
+        if savedMemeForEdit != nil {
+            savedMemeForEdit = meme
+            } else {
+            appDelegate.memes.append(meme) // new 2.0
+            }
+        */
+        
         appDelegate.memes.append(meme) // new 2.0
     }
     
@@ -356,12 +365,17 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func touchedDoneButton(sender: UIBarButtonItem) { // @@@
         let memedImage = generateMemedImage()
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image ?? UIImage(), memedImage: memedImage)
+        
+        let object = UIApplication.shared.delegate // new 2.0
+        let appDelegate = object as! AppDelegate // new 2.0
+        
         if memeToEdit != nil {
             // copy editor data back to meme
             Meme.array[memeToEdit!] = meme
         } else {
             // add editor data to array of existing memes
-            Meme.array.append(meme)
+            appDelegate.memes[index] = meme
+            // Meme.array.append(meme)
         }
 
         dismiss(animated: false, completion: nil)

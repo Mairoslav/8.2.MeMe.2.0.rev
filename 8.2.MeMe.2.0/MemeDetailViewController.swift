@@ -10,6 +10,7 @@ import UIKit
 class MemeDetailViewController: UIViewController {
     
     var meme: Meme!
+    var index: Int? // to change an array need its index, index is provided when user selects a meme in the table or collection view. This index should also be passed to the MemeEditor so you can use it when saving the changed meme - see EditMemeViewController. // Udacity
     
     @IBOutlet weak var savedMemeDetail: UIImageView!
     
