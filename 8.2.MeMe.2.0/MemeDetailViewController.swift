@@ -22,7 +22,14 @@ class MemeDetailViewController: UIViewController {
     @IBAction func editSavedMeme(_ sender: Any) {
         let editMemeViewController = self.storyboard!.instantiateViewController(withIdentifier: "EditMemeViewController") as! EditMemeViewController
         editMemeViewController.savedMemeForEdit = meme
-        navigationController!.pushViewController(editMemeViewController, animated: true) // original
+        // navigationController!.pushViewController(editMemeViewController, animated: true)
+        // instead of using above push, use present to avoid displaying table and collection icons in Meme Editor
+        present(editMemeViewController, animated: true)
+        // navigationController?.present(editMemeViewController, animated: true, completion: nil) // also works
+        
+        // display image so that is covers the whole screen area
+        editMemeViewController.imagePickerView.contentMode = .scaleAspectFill
+        
     }
     
     /*

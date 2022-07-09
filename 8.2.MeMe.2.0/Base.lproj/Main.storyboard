@@ -24,7 +24,7 @@
                         </imageReference>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9WB-0G-5wV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -67,7 +67,7 @@
                         </imageReference>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d63-qF-ih1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -176,6 +176,7 @@
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="waM-yN-9B0"/>
                                     <barButtonItem image="square.and.pencil" catalog="system" id="7Av-q2-9zu">
+                                        <color key="tintColor" systemColor="linkColor"/>
                                         <connections>
                                             <action selector="editSavedMeme:" destination="eB7-6r-HC9" id="EDg-Ax-v0s"/>
                                         </connections>
@@ -358,12 +359,19 @@
                                                 <action selector="share:" destination="BYZ-38-t0r" id="aNU-1d-mYM"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="cancel" id="Lhf-aM-gkT" userLabel="cancelButton">
-                                            <color key="tintColor" systemColor="systemBlueColor"/>
-                                            <connections>
-                                                <action selector="cancel:" destination="BYZ-38-t0r" id="tPg-2M-hoq"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="cancel" id="Lhf-aM-gkT" userLabel="cancelButton">
+                                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                                <connections>
+                                                    <action selector="cancel:" destination="BYZ-38-t0r" id="tPg-2M-hoq"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="done" id="weo-s8-oEh">
+                                                <connections>
+                                                    <action selector="touchedDoneButtonWithSender:" destination="BYZ-38-t0r" id="uCf-gv-EPg"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -396,6 +404,7 @@
                         <outlet property="bottomTextField" destination="aO0-iW-1el" id="Wqd-nA-XuD"/>
                         <outlet property="cameraButton" destination="QE6-oy-q1B" id="8SM-3b-TSQ"/>
                         <outlet property="cancelButton" destination="Lhf-aM-gkT" id="V2v-EW-O6Q"/>
+                        <outlet property="doneButton" destination="weo-s8-oEh" id="inw-5M-CHG"/>
                         <outlet property="imagePickerView" destination="YXP-BJ-zry" id="dew-PE-rNN"/>
                         <outlet property="shareButton" destination="u5K-5P-eo8" id="395-ph-lPG"/>
                         <outlet property="toolbar" destination="0Jx-xc-mXl" id="qgr-z5-6Mm"/>
@@ -418,6 +427,9 @@
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <image name="square.grid.3x3.topleft.filled" catalog="system" width="128" height="112"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -27,7 +27,13 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    @IBOutlet weak var doneButton: UIBarButtonItem! // @@@
+    
     var savedMemeForEdit: Meme? // to enable edit saved meme in detail view
+    
+    var memeIsEditing = false // meme data is being editied @@@
+    var memeIsModified = false // meme data has been modified @@@
+    var memeToEdit: Int? = nil // create if nil, else edit @@@
     
     var imagePicker = UIImagePickerController() // an instance of UIImagePickerController
     
@@ -57,14 +63,51 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // if there's not yet image in the imageView, disable the share button
         // shareButton.isEnabled = false
         
-        if let memeFromDetail = savedMemeForEdit as Meme? {
-            // imagePickerView.image = memeFromDetail.image
-            // imagePickerView.image = memeFromDetail.memedImage
-            self.imagePickerView.image = memeFromDetail.image
-            
+        // to enable edit saved meme in detail view
+        if let savedMemeForEdit = savedMemeForEdit as Meme? {
+            self.imagePickerView.image = savedMemeForEdit.image
+        } // or can use code below
+        
+        /*
+        if (savedMemeForEdit != nil) {
+            self.imagePickerView.image = savedMemeForEdit?.image
         }
+        */
+        
+        // if (savedMemeForEdit != nil) {
+    
+        // setupEditor()
         
     }
+    
+    /*
+     .....
+     Create control var, if editing existing image, from Detail pass:
+        > index path to override the meme, or
+        > meme object itself
+     .....
+     
+     To enable the user to save the meme after editing instead of sharing it, add a control variable in EditMemeViewController, it would control if the user is:
+     
+            a) creating a new meme
+            b) editing an existing one - if it’s editing you would override the meme using its index path passed from the MemeDetailViewController. ~ Also, you can pass the meme object itself from MemeDetailViewController and display its values in the screen.
+     
+     Key words/phrases:
+    
+            - add control variable: var editedMeme: Meme?
+            - override the meme using its index path passed from the MemeDetailViewController
+            - also you can pass the meme object itself from MemeDetailViewController
+     
+            - conrol variable
+            - override meme via index path from Detail
+            - OR can also pass meme object itself from Detail
+     
+            simply:
+            - if varXY:  a) creating new meme ... no change vs what is now
+                         b) editng existing one ...
+                                - do override meme via idex path
+                                - OR pass object from Detail:
+     */
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -106,6 +149,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             
             // inside didFinishPickingMediaWithInfo we enable the share button to use it i.e. once we have picture we enable share button
             shareButton.isEnabled = true
+            memeIsModified = true // @@@
+            setupButtons() // @@@
         }
         dismiss(animated: true, completion: nil) // dismiss image picker after xy image is selected
     }
@@ -122,6 +167,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
         }
+        memeIsModified = true // @@@
+        setupButtons() // @@@
     }
     
     // MARK: Text Field Delegate
@@ -234,8 +281,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // create the meme
         let memedImage = generateMemedImage()
         
-        // pack the layers on each other using components from struct set above
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView, memedImage: memedImage) // new 2.0
+        // pack the layers on each other using components from struct set above // @@@ added ?? ...
+        let meme = Meme(topText: topTextField.text ?? String(), bottomText: bottomTextField.text ?? String(), image: imageView ?? UIImage(), memedImage: memedImage ) // new 2.0
         
         // variable to store memes
         var memes = [Meme]() // instead of forced unwrap var memes: [Meme]! use as it is now
@@ -282,6 +329,50 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil) // new 2.0 cancel button to return to the Sent Memes View
     }
     
+    func setupEditor() { // @@@
+        if memeToEdit != nil && !memeIsEditing {
+            // setup editor with meme data ONCE
+            
+            // let meme = Meme.array[memeToEdit!]
+            let meme = Meme.array[memeToEdit!]
+            topTextField.text = meme.topText
+            topTextField.clearsOnBeginEditing = false
+            bottomTextField.text = meme.bottomText
+            bottomTextField.clearsOnBeginEditing = false
+            imagePickerView.image = meme.image
+            memeIsEditing = true
+            
+            topNavBar.topItem!.title = "Edit"
+        }
+    }
+    
+    func setupButtons() { // @@@
+        // hide/show done button
+        let show = memeIsModified && imagePickerView.image != nil
+        doneButton!.tintColor = show ? view.tintColor : UIColor.clear
+        doneButton!.isEnabled = show
+    }
+    
+    @IBAction func touchedDoneButton(sender: UIBarButtonItem) { // @@@
+        let memedImage = generateMemedImage()
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image ?? UIImage(), memedImage: memedImage)
+        if memeToEdit != nil {
+            // copy editor data back to meme
+            Meme.array[memeToEdit!] = meme
+        } else {
+            // add editor data to array of existing memes
+            Meme.array.append(meme)
+        }
+
+        dismiss(animated: false, completion: nil)
+
+    }
+    
+    override func viewDidLayoutSubviews() { // @@@
+        super.viewDidLayoutSubviews()
+        setupEditor()
+    }
+    
 }
 
 /*
@@ -298,6 +389,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
  https://stackoverflow.com/questions/26390072/how-to-remove-border-of-the-navigationbar-in-swift
  https://www.hackingwithswift.com/example-code/uikit/how-to-swipe-to-delete-uitableviewcells
  https://www.youtube.com/watch?v=F6dgdJCFS1Q
+ https://github.com/glennaxworthy/Meme-Me-2.0
  */
 
 
