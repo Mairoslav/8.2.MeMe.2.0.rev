@@ -57,10 +57,8 @@ class MemeTableViewController: UITableViewController {
         // MARK: 1. tableView(_:numberOfRowsInSection:)
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return self.memes.count
-        
-    }
+    } // numberOfRows
     
         // MARK: 2.a tableView(_:cellForRowAt:) integrating custom table view cell
     
@@ -72,7 +70,6 @@ class MemeTableViewController: UITableViewController {
         // Change color of table view cell when clicked
         // ...
     
-        
         // Set the name and image
         
         // cell.nameLabel.text = meme.topText // + meme.bottomText // add nameLabel under UIImage
@@ -81,15 +78,14 @@ class MemeTableViewController: UITableViewController {
         cell.memeTitleLabel?.text = meme.topText + " " + meme.bottomText
         
         return cell
-        
-    }
+    } // cellForRowAtIndexPath
     
     // display meme detail
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
         detailController.meme = self.memes[indexPath.item]
         detailController.index = indexPath.row // to change an array need its index, see MemeDetailVC
-        self.navigationController!.pushViewController(detailController, animated: true)
+        self.navigationController?.pushViewController(detailController, animated: true)
     }
     
     // swipe to delete table row part-a

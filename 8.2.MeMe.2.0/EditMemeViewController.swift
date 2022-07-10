@@ -29,11 +29,13 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBOutlet weak var doneButton: UIBarButtonItem! // @@@
     
-    var savedMemeForEdit: Meme? // to enable edit saved meme in detail view
+    var savedMemeForEdit: Meme! // to enable edit saved meme in detail view, had to change ? to !
     
-    var memeIsEditing = false // meme data is being editied @@@
-    var memeIsModified = false // meme data has been modified @@@
-    var memeToEdit: Int? = nil // create if nil, else edit @@@
+    var memeIsEditing = false // @@@
+    var memeIsModified = false // @@@
+    var memeToEdit: Int? = nil // create meme if memeToEdit is nil, otherwise edit memeToEdit @@@
+    
+    var index: Int?
     
     var imagePicker = UIImagePickerController() // an instance of UIImagePickerController
     
@@ -49,6 +51,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // need when text style progamaticaly via method configureTextField(textField: UITextField)
         configureTextField(textField: bottomTextField)
         configureTextField(textField: topTextField)
+        setupButtons()
+        setupEditor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +80,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         
         // if (savedMemeForEdit != nil) { ...
     
-        // setupEditor()
+        setupEditor()
+        
+        // setupButtons()
+        
+        // doneButton.isEnabled = false
+        setupButtons()
         
     }
     
@@ -149,9 +158,11 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             
             // inside didFinishPickingMediaWithInfo we enable the share button to use it i.e. once we have picture we enable share button
             shareButton.isEnabled = true
-            memeIsModified = true // @@@
+            // memeIsModified = true // @@@
             setupButtons() // @@@
         }
+        // memeIsModified = true // @@@
+        // setupButtons() // @@@
         dismiss(animated: true, completion: nil) // dismiss image picker after xy image is selected
     }
     
@@ -166,9 +177,10 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
+            memeIsModified = true
         }
-        memeIsModified = true // @@@
-        setupButtons() // @@@
+        // memeIsModified = true // @@@
+        // setupButtons() // @@@
     }
     
     // MARK: Text Field Delegate
@@ -340,7 +352,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func setupEditor() { // @@@
         if memeToEdit != nil && !memeIsEditing {
-            // setup editor with meme data ONCE
+            // setup editor with meme data once
             
             // let meme = Meme.array[memeToEdit!]
             let meme = Meme.array[memeToEdit!]
@@ -357,11 +369,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func setupButtons() { // @@@
         // hide/show done button
-        let show = memeIsModified && imagePickerView.image != nil
+        let show = memeIsModified // && imagePicker.isViewLoaded // try memeIsEditing instead of Modified
         doneButton!.tintColor = show ? view.tintColor : UIColor.clear
-        doneButton!.isEnabled = show
+        // doneButton!.isEnabled = show ? true : false
     }
-    
+        
+        
     @IBAction func touchedDoneButton(sender: UIBarButtonItem) { // @@@
         let memedImage = generateMemedImage()
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image ?? UIImage(), memedImage: memedImage)
@@ -369,22 +382,31 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         let object = UIApplication.shared.delegate // new 2.0
         let appDelegate = object as! AppDelegate // new 2.0
         
-        if memeToEdit != nil {
+        // if memeToEdit == nil { // if memeToEdit != nil { // how to get some value for memeToEdit when edited? So can write if memeToEdit != nil
             // copy editor data back to meme
-            Meme.array[memeToEdit!] = meme
-        } else {
+            // Meme.array[index ?? Int()] = meme
+            // Meme.array[index!] = meme // appDelegate.memes[memeToEdit!] = meme
+            // Meme.array[index ?? Int()] = meme
+            // appDelegate.memes[index ?? Int()] = meme
+            appDelegate.memes[index ?? Int()] = meme
+        /* } else { // probably not need else, because I only want to replace the memed image when editing it
             // add editor data to array of existing memes
-            appDelegate.memes[index] = meme
+            // appDelegate.memes[index ?? Int()] = meme
             // Meme.array.append(meme)
-        }
-
-        dismiss(animated: false, completion: nil)
-
+            // appDelegate.memes.append(meme)
+            // Meme.array[index ?? Int()] = meme // index out of range
+            appDelegate.memes[index ?? Int()] = meme
+        }*/
+         
+        let tabBarController = self.storyboard!.instantiateViewController(withIdentifier: "TabBarControllerInitialController") as! UITabBarController
+        present(tabBarController, animated: true, completion: nil)
+        
     }
     
     override func viewDidLayoutSubviews() { // @@@
         super.viewDidLayoutSubviews()
         setupEditor()
+        print("setupEditor occurs")
     }
     
 }

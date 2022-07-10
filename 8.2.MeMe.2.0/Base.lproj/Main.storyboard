@@ -24,7 +24,7 @@
                         </imageReference>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9WB-0G-5wV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -38,7 +38,7 @@
         <!--TabBarController-InitialController-->
         <scene sceneID="CEp-oh-Ru5">
             <objects>
-                <tabBarController title="TabBarController-InitialController" id="OYi-oQ-EGf" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarControllerInitialController" title="TabBarController-InitialController" modalPresentationStyle="fullScreen" id="OYi-oQ-EGf" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WrW-qW-LM5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -56,7 +56,7 @@
         <!--TableNavigationController-->
         <scene sceneID="GLz-QN-VLM">
             <objects>
-                <navigationController title="TableNavigationController" id="QL7-yh-Nz5" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TableNavitationController" title="TableNavigationController" id="QL7-yh-Nz5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Table" id="gtd-ei-zaO">
                         <imageReference key="image" image="list.dash" catalog="system" symbolScale="large" renderingMode="hierarchical-single">
                             <hierarchicalColors>
@@ -67,7 +67,7 @@
                         </imageReference>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d63-qF-ih1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -81,7 +81,7 @@
         <!--Sent Memes-->
         <scene sceneID="bIt-Oa-xUW">
             <objects>
-                <tableViewController id="FOd-Vg-xCf" customClass="MemeTableViewController" customModule="__2_MeMe_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MemeTableViewController" modalPresentationStyle="fullScreen" id="FOd-Vg-xCf" customClass="MemeTableViewController" customModule="__2_MeMe_2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Hby-LJ-d56">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -271,7 +271,7 @@
         <!--EditMemeViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="EditMemeViewController" id="BYZ-38-t0r" userLabel="EditMemeViewController" customClass="EditMemeViewController" customModule="__2_MeMe_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditMemeViewController" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" userLabel="EditMemeViewController" customClass="EditMemeViewController" customModule="__2_MeMe_2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -418,7 +418,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XAN-Kn-SI8"/>
+        <segue reference="Yiz-iQ-S99"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
