@@ -52,7 +52,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         configureTextField(textField: bottomTextField)
         configureTextField(textField: topTextField)
         setupButtons()
-        setupEditor()
+        // setupEditor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +80,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         
         // if (savedMemeForEdit != nil) { ...
     
-        setupEditor()
+        // setupEditor()
         
         // setupButtons()
         
@@ -349,7 +349,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         shareButton.isEnabled = false // no picture no share button
         dismiss(animated: true, completion: nil) // new 2.0 cancel button to return to the Sent Memes View
     }
-    
+    /*
     func setupEditor() { // @@@
         if memeToEdit != nil && !memeIsEditing {
             // setup editor with meme data once
@@ -365,7 +365,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             
             topNavBar.topItem!.title = "Edit"
         }
-    }
+    } */
     
     func setupButtons() { // @@@
         // hide/show done button
@@ -402,13 +402,13 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         present(tabBarController, animated: true, completion: nil)
         
     }
-    
+    /*
     override func viewDidLayoutSubviews() { // @@@
         super.viewDidLayoutSubviews()
         setupEditor()
         print("setupEditor occurs")
     }
-    
+    */
 }
 
 /*

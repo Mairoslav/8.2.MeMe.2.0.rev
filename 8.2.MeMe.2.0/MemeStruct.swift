@@ -15,13 +15,13 @@ import UIKit // have to import UIKit, otherwise Error: "Cannot find type 'UIImag
 struct Meme {
     
     // MARK: properties
-    /*
+    
     var topText: String = ""
     var bottomText: String = ""
     var image: UIImage?
     var memedImage: UIImage?
-    */
     
+    /*
     var topText: String! = nil // @@@
     var bottomText: String! = nil
     var image: UIImage! = nil
@@ -41,5 +41,5 @@ struct Meme {
         self.bottomText = bottomText
         self.image = image
         self.memedImage = memedImage
-    }
+    } */
 }

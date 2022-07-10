@@ -34,9 +34,9 @@ class MemeDetailViewController: UIViewController {
         // display image so that is covers the whole screen area
         editMemeViewController.imagePickerView.contentMode = .scaleAspectFill
         
-        editMemeViewController.memeIsEditing = true
+        // editMemeViewController.memeIsEditing = true
         editMemeViewController.memeIsModified = true
-        editMemeViewController.setupEditor()
+        // editMemeViewController.setupEditor()
         
     }
     
