@@ -25,6 +25,7 @@ class MemeDetailViewController: UIViewController {
     @IBAction func editSavedMeme(_ sender: Any) {
         let editMemeViewController = self.storyboard!.instantiateViewController(withIdentifier: "EditMemeViewController") as! EditMemeViewController
         editMemeViewController.savedMemeForEdit = meme
+        editMemeViewController.index = index // pass the index from MemeDetailViewController to EditMemeViewController so that edited meme does replace itself
         // navigationController!.pushViewController(editMemeViewController, animated: true)
         // instead of using above push, use present to avoid displaying table and collection icons in Meme Editor
         
@@ -35,7 +36,7 @@ class MemeDetailViewController: UIViewController {
         editMemeViewController.imagePickerView.contentMode = .scaleAspectFill
         
         // editMemeViewController.memeIsEditing = true
-        editMemeViewController.memeIsModified = true
+        editMemeViewController.memeIsModified = true // done button to show only when already saved meme is modified/edited
         // editMemeViewController.setupEditor()
         
     }

@@ -158,7 +158,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             
             // inside didFinishPickingMediaWithInfo we enable the share button to use it i.e. once we have picture we enable share button
             shareButton.isEnabled = true
-            // memeIsModified = true // @@@
+            // memeIsModified = true // so done button appears when image is edit
             setupButtons() // @@@
         }
         // memeIsModified = true // @@@
@@ -177,7 +177,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
-            memeIsModified = true
+            // memeIsModified = true // so done button appears when text edits
         }
         // memeIsModified = true // @@@
         // setupButtons() // @@@
@@ -426,6 +426,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
  https://www.hackingwithswift.com/example-code/uikit/how-to-swipe-to-delete-uitableviewcells
  https://www.youtube.com/watch?v=F6dgdJCFS1Q
  https://github.com/glennaxworthy/Meme-Me-2.0
+ https://medium.com/yay-its-erica/xcode-debugging-with-breakpoints-for-beginners-5b0d0a39d711
+ https://learn.udacity.com/nanodegrees/nd003/parts/d39242a9-44f8-429c-8094-bf4969715419/lessons/2241133c-e88e-4877-88eb-273599e5e9b6/concepts/7d36557a-2362-42d1-aa12-ac81ccb9349f
  */
 
 

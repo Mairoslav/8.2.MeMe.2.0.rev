@@ -47,3 +47,22 @@ import UIKit
 
 }
 
+/*
+extension AppDelegate {
+    
+    override var description: String {
+        return "PrintSettingsViewController contains \(memes.count) bugs."
+    }
+    
+    override var debugDescription: String {
+        var index = 0
+        var debugString = "PrintSettingsViewController contains \(memes.count) bugs. \n"
+        for meme in memes {
+            debugString = debugString + "Bug \(index): \(meme.frame) \n"
+        index += 1
+        }
+        return debugString
+    }
+    
+}
+ */

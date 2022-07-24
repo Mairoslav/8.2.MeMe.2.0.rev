@@ -40,6 +40,7 @@ class MemeTableViewController: UITableViewController {
         super.viewDidLoad()
         table.delegate = self // swipe to delete table row
         table.dataSource = self // swipe to delete table row
+        reloadTableAndCollection() // notification
     }
     
     // MARK: reload the table view whenever it appears so memes can be displayed
@@ -102,6 +103,35 @@ class MemeTableViewController: UITableViewController {
             tableView.reloadData() // ??? deleted rows keep re-appearing after new meme is shared
             tableView.endUpdates()
         }
+        
+    // notification
+    @objc func reloadTable(_ notification: Notification) {
+        if editingStyle == .delete {
+            tableView.reloadData()
+            // UICollectionView.reloadData() // shall be collection view mergen with tableView in one file?
+            }
+        }
+        
+    func reloadTableAndCollection() {
+        // observer <- selector / target <- action
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTable(_:)), name: .didDeleteCell, object: nil)
+        }
+        
+    extension Notification.Name{
+        
+        static var didDeleteCell: Notification.Name {
+            return .init(rawValue: "didDeleteCell")
+            }
+        }
+     
+    // to avoid deleted item to re/appear in table/collection
+    // the easier way to implement this are Notifications
+    // with them you can send a message to the collection/table view controller asking them to reload data
+    // https://mobikul.com/introduction-of-notification-center-in-swift/amp/
+        /// see how Notifications are used in this project in case of keybord show/hide...
+    // The bug you are facing happens because when the user opens the collection view after deleting an row from the table view the array of memes gets reset.
+    // If you place a breakpoint in the array in the AppDelegare you will notice the behavior.
+        
     }
     
    
