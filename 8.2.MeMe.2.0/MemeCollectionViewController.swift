@@ -34,6 +34,12 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 118, height: 118)
         collectionView.collectionViewLayout = layout
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didDeleteRow), name: Notification.Name("reloadAfterRowDeleted"), object: nil) 
+    }
+    
+    @objc func didDeleteRow() { 
+        collectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
