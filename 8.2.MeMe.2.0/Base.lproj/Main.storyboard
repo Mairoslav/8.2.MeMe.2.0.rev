@@ -24,7 +24,7 @@
                         </imageReference>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9WB-0G-5wV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -67,7 +67,7 @@
                         </imageReference>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d63-qF-ih1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -145,6 +145,11 @@
                         <barButtonItem title="Item" image="square.and.pencil" catalog="system" id="Le2-P8-YLy"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Sent Memes" id="vmM-lT-aUY">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" image="mount" catalog="system" id="DrY-Yd-dYk">
+                            <connections>
+                                <action selector="didTapSort" destination="FOd-Vg-xCf" id="ByR-5W-uG9"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="addNewMemeButton" image="plus.square.on.square" catalog="system" id="qcZ-VD-v4f">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="Yiz-iQ-S99"/>
@@ -368,7 +373,7 @@
                                             </barButtonItem>
                                             <barButtonItem title="done" id="weo-s8-oEh">
                                                 <connections>
-                                                    <action selector="touchedDoneButtonWithSender:" destination="BYZ-38-t0r" id="uCf-gv-EPg"/>
+                                                    <action selector="doneButtonTappedWithSender:" destination="BYZ-38-t0r" id="8aD-Hd-zJo"/>
                                                 </connections>
                                             </barButtonItem>
                                         </rightBarButtonItems>
@@ -423,6 +428,7 @@
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="mount" catalog="system" width="116" height="128"/>
         <image name="plus.square.on.square" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>

@@ -9,6 +9,7 @@ import Foundation
 import UIKit // have to import UIKit, otherwise Error: "Cannot find type 'UIImage' in scope"
 
 // MARK: struct
+
 // Meme struct is in a separate file. In the MVC design pattern, we want to keep the model and controller code separately.
 // for each individual meme object need struct that includes the following component properties:
 
@@ -22,7 +23,7 @@ struct Meme {
     var memedImage: UIImage?
     
     /*
-    var topText: String! = nil // @@@
+    var topText: String! = nil // with init
     var bottomText: String! = nil
     var image: UIImage! = nil
     var memedImage: UIImage! = nil

@@ -13,6 +13,7 @@ import UIKit
 class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     // MARK: Outlets
+    
     @IBOutlet weak var imagePickerView: UIImageView!
     
     @IBOutlet weak var albumButton: UIBarButtonItem!
@@ -29,17 +30,17 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBOutlet weak var doneButton: UIBarButtonItem! // @@@
     
-    var savedMemeForEdit: Meme! // to enable edit saved meme in detail view, had to change ? to !
+    var savedMemeForEdit: Meme! // to enable editing saved meme in detail view, had to change ? to !
     
-    var memeIsEditing = false // @@@
-    var memeIsModified = false // @@@
-    var memeToEdit: Int? = nil // create meme if memeToEdit is nil, otherwise edit memeToEdit @@@
+    var memeIsModified = false // for done button to show only when already saved memeIsModified
     
-    var index: Int?
+    var indexX: Int? // to replace the meme image at given index when editing it
     
     var imagePicker = UIImagePickerController() // an instance of UIImagePickerController
+
     
     // MARK: view-DidLoad/willAppear/willDisappear
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // set View Controller as the delegate for the UIImagePickerController
@@ -51,8 +52,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // need when text style progamaticaly via method configureTextField(textField: UITextField)
         configureTextField(textField: bottomTextField)
         configureTextField(textField: topTextField)
-        setupButtons()
-        // setupEditor()
+        showHideDoneButton() // show done button only when already saved memeIsModified = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,62 +61,30 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         
         // disable the camera button in cases when this bool returns false for the camera sourceType
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        
         // call subscribeToKeybordNotifications() method in viewWillAppear
+        // to allow the view to raise when keybord does show up
         subscribeToKeyboardNotifications()
         
         // if there's not yet image in the imageView, disable the share button
         // shareButton.isEnabled = false
         
-        // to enable edit saved meme in detail view
+        // to enable editing saved meme in detail view
         if let savedMemeForEdit = savedMemeForEdit as Meme? {
-            self.imagePickerView.image = savedMemeForEdit.image
+            imagePickerView.image = savedMemeForEdit.image
+            topTextField.text = savedMemeForEdit.topText
+            bottomTextField.text = savedMemeForEdit.bottomText
         } // or can use code below
         
         /*
         if (savedMemeForEdit != nil) {
-            self.imagePickerView.image = savedMemeForEdit?.image
+            code ...
         }
         */
         
-        // if (savedMemeForEdit != nil) { ...
-    
-        // setupEditor()
-        
-        // setupButtons()
-        
-        // doneButton.isEnabled = false
-        setupButtons()
+        showHideDoneButton() // show done button only when already saved memeIsModified = true
         
     }
-    
-    /*
-     .....
-     Create control var, if editing existing image, from Detail pass:
-        > index path to override the meme, or
-        > meme object itself
-     .....
-     
-     To enable the user to save the meme after editing instead of sharing it, add a control variable in EditMemeViewController, it would control if the user is:
-     
-            a) creating a new meme
-            b) editing an existing one - if it’s editing you would override the meme using its index path passed from the MemeDetailViewController. ~ Also, you can pass the meme object itself from MemeDetailViewController and display its values in the screen.
-     
-     Key words/phrases:
-    
-            - add control variable: var editedMeme: Meme?
-            - override the meme using its index path passed from the MemeDetailViewController
-            - also you can pass the meme object itself from MemeDetailViewController
-     
-            - conrol variable
-            - override meme via index path from Detail
-            - OR can also pass meme object itself from Detail
-     
-            simply:
-            - if varXY:  a) creating new meme ... no change vs what is now
-                         b) editng existing one ...
-                                - do override meme via idex path
-                                - OR pass object from Detail:
-     */
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -127,22 +95,25 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: actions to the buttons to load the UIImagePickerController
     // we’ll call up the UIImagePickerController here
     
-    // creating this reusable method, one that is repeated for album and camera @IBActions methods
+    // creating this reusable method, one that is repeated for album and camera @IBActions methods that follow after this method, see sourceType parameter
     func pickImage(sourceType: UIImagePickerController.SourceType) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = sourceType
         present(imagePicker, animated: true, completion: nil)
         }
     
+    // picking an image from Album
     @IBAction func album(_ sender: Any) {
         pickImage(sourceType: .photoLibrary)
     }
     
+    // taking an image via camera
     @IBAction func camera(_ sender: Any) {
         pickImage(sourceType: .camera)
     }
     
-    // MARK: - UIImagePickerControllerDelegate Method I.
+    // MARK: - UIImagePickerControllerDelegate Method I. - picture to appear
+    
     // to read the Image Picked from UIImagePickerController - so that selected picture appears in UIImageView
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // will send the data back for us to use in that Swift Dictionary named “info”
@@ -156,41 +127,38 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             imagePickerView.contentMode = .scaleAspectFill // fit view, clipped to avoid distortion
             imagePickerView.image = pickedImage // sets the image of the UIImageView to be the image we just got pack.
             
-            // inside didFinishPickingMediaWithInfo we enable the share button to use it i.e. once we have picture we enable share button
-            shareButton.isEnabled = true
-            // memeIsModified = true // so done button appears when image is edit
-            setupButtons() // @@@
+            shareButton.isEnabled = true // once we have picture we enable share button
+            showHideDoneButton() // show done button only when already saved memeIsModified = true
         }
-        // memeIsModified = true // @@@
-        // setupButtons() // @@@
         dismiss(animated: true, completion: nil) // dismiss image picker after xy image is selected
     }
     
-    // MARK: - UIImagePickerControllerDelegate Method II.
+    // MARK: - UIImagePickerControllerDelegate Method II. - picture to be cancelled
+    
     // is called when the user taps the “Cancel” button on top left of image picker
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil) // dismiss image picker after button "Cancel" is pressed
+        dismiss(animated: true, completion: nil) // dismiss image picker after button "Cancel" is tapped
     }
     
-    // MARK: Text Field Delegate
+    // MARK: Text Field Delegate I. - default text to clear when user starts typing
+    
     // when a user taps inside the textfiels the default text should clear
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
-            // memeIsModified = true // so done button appears when text edits
         }
-        // memeIsModified = true // @@@
-        // setupButtons() // @@@
     }
     
-    // MARK: Text Field Delegate
-    // when a user presses return, the keyboard should be dismissed
+    // MARK: Text Field Delegate II. - keybord to get down after tapping return/enter
+    
+    // when a user presses return/enter, the keyboard should be dismissed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    //MARK: - text style in textFields
+    //MARK: Text style in textFields
+    
     func configureTextField(textField: UITextField) {
         let textStyle: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black,
@@ -212,12 +180,14 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         
         textField.defaultTextAttributes = textStyle
         textField.textAlignment = NSTextAlignment.center
+        
     }
     
     // MARK: Moving the view functions
+    
     // how do we know when the keybord is about to slide up?
     // NSNotifications provide a way to notice information throughout the program across classes
-    // to anounce infomration like the keybord does show/hide, get info on keybord height...
+    // to anounce information like the keybord does show/hide, here get info on keybord height...
     @objc func keybordWillShow(_ notification: Notification) {
         // To move the view up above the keybord, frame view is reduced by the height of keybord vs original vertical position (y)
         if bottomTextField.isFirstResponder {
@@ -241,32 +211,32 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     
     // MARK: subscribe/sign up to be notified when the keyboard appears
+    
     // see also func func viewWilAppear & viewWillDisappear at the begining of project where the:
         // subscribeToKeyboardNotifications() & unsubscribeFromKeyboardNotifications() methods are called
     func subscribeToKeyboardNotifications() {
         // argument of '#selector' refers to instance method 'keybordWillShow' that is not exposed to Objective-C
         // add '@objc' to expose this instance method to Objective-C
-        // NotificationCenter.default.addObserver(<#T##observer: Any##Any#>, selector: <#T##Selector#>, name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keybordWillShow(_: )), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: unsubscribe
+    
     func unsubscribeFromKeybordNotification() {
-        // NotificationCenter.default.removeObserver(<#T##observer: Any##Any#>, name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
-        // can remove two observers at once like this:
         // NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         // NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        // or can remove two above observers at once like this:
         NotificationCenter.default.removeObserver(self)
     }
     // Every iOS program has one default NotificationCenter, NotificationCenter.default which comes with a number of useful stock notifications, like .UIKeyboardWillShow
     // https://developer.apple.com/documentation/foundation/notification
     
     // MARK: making object to represent MeMe
-    // combining image and text
-    // grab an image context and let it render the view hierarchy (image & textfields in this case) into a UIImage object.
     
+    // combining image and text
+    // grab an image context and let it render the view hierarchy (image & textfields in this case) into a UIImage object ~ "blend meme"
     func generateMemedImage() -> UIImage {
         
         //Hide Toolbar And Navigation Bar
@@ -284,41 +254,30 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     // MARK: save
+    
     // method that initializes a Meme model object
     func save() {
         
         // get the image from the imagePickerView
-        let imageView = imagePickerView.image // without this let, in let meme just "image: imagePickerView.image"
+        let imageView = imagePickerView.image
         
-        // create the meme
+        // "blend meme"
         let memedImage = generateMemedImage()
         
-        // pack the layers on each other using components from struct set above // @@@ added ?? ...
-        let meme = Meme(topText: topTextField.text ?? String(), bottomText: bottomTextField.text ?? String(), image: imageView ?? UIImage(), memedImage: memedImage ) // new 2.0
+        // pack the layers on each other using components from struct set above 
+        let meme = Meme(topText: topTextField.text ?? String(), bottomText: bottomTextField.text ?? String(), image: imageView ?? UIImage(), memedImage: memedImage ) // with init, see file MemeStruct
         
-        // variable to store memes
-        var memes = [Meme]() // instead of forced unwrap var memes: [Meme]! use as it is now
-        memes.append(meme)
-        
-        // add the meme to the memes array in the AppDelegate.swift
-        let object = UIApplication.shared.delegate // new 2.0
-        let appDelegate = object as! AppDelegate // new 2.0
-        
-        /*
-        if savedMemeForEdit != nil {
-            savedMemeForEdit = meme
-            } else {
-            appDelegate.memes.append(meme) // new 2.0
-            }
-        */
-        
-        appDelegate.memes.append(meme) // new 2.0
+        // so that I can access appDelegate in the scope of current file
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+            appDelegate.memes.append(meme) // add the meme to the memes array in the AppDelegate.swift
     }
     
     // MARK: share
+    
     @IBAction func share(_ sender: Any) {
         
-        // generate memed image
+        // "blend meme"
         let memedImage = generateMemedImage()
         
         // define an instance of ActivityViewController
@@ -342,93 +301,43 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     // MARK: cancel
+    
     @IBAction func cancel(_ sender: Any) {
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
         self.imagePickerView.image = nil
         shareButton.isEnabled = false // no picture no share button
-        dismiss(animated: true, completion: nil) // new 2.0 cancel button to return to the Sent Memes View
+        dismiss(animated: true, completion: nil) // cancel button to return user to the Sent Memes View
     }
-    /*
-    func setupEditor() { // @@@
-        if memeToEdit != nil && !memeIsEditing {
-            // setup editor with meme data once
-            
-            // let meme = Meme.array[memeToEdit!]
-            let meme = Meme.array[memeToEdit!]
-            topTextField.text = meme.topText
-            topTextField.clearsOnBeginEditing = false
-            bottomTextField.text = meme.bottomText
-            bottomTextField.clearsOnBeginEditing = false
-            imagePickerView.image = meme.image
-            memeIsEditing = true
-            
-            topNavBar.topItem!.title = "Edit"
-        }
-    } */
     
-    func setupButtons() { // @@@
-        // hide/show done button
-        let show = memeIsModified // && imagePicker.isViewLoaded // try memeIsEditing instead of Modified
-        doneButton!.tintColor = show ? view.tintColor : UIColor.clear
-        // doneButton!.isEnabled = show ? true : false
+    // show done button only when already saved memeIsModified = true
+    func showHideDoneButton() {
+        let showDone = memeIsModified
+        doneButton!.tintColor = showDone ? view.tintColor : UIColor.clear
+        // doneButton!.isEnabled = show ? true : false // grey font of done becomes blue
     }
         
+    @IBAction func doneButtonTapped(sender: UIBarButtonItem) {
         
-    @IBAction func touchedDoneButton(sender: UIBarButtonItem) { // @@@
+        // "blend meme"
         let memedImage = generateMemedImage()
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image ?? UIImage(), memedImage: memedImage)
         
-        let object = UIApplication.shared.delegate // new 2.0
-        let appDelegate = object as! AppDelegate // new 2.0
+        // to put together layers of modified meme, texts, image and final "blended" memedImage
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image ?? UIImage(), memedImage: memedImage) // with init, see file MemeStruct
         
-        // if memeToEdit == nil { // if memeToEdit != nil { // how to get some value for memeToEdit when edited? So can write if memeToEdit != nil
-            // copy editor data back to meme
-            // Meme.array[index ?? Int()] = meme
-            // Meme.array[index!] = meme // appDelegate.memes[memeToEdit!] = meme
-            // Meme.array[index ?? Int()] = meme
-            // appDelegate.memes[index ?? Int()] = meme
-            appDelegate.memes[index ?? Int()] = meme
-        /* } else { // probably not need else, because I only want to replace the memed image when editing it
-            // add editor data to array of existing memes
-            // appDelegate.memes[index ?? Int()] = meme
-            // Meme.array.append(meme)
-            // appDelegate.memes.append(meme)
-            // Meme.array[index ?? Int()] = meme // index out of range
-            appDelegate.memes[index ?? Int()] = meme
-        }*/
+        // so that I can access appDelegate in the scope of current file
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+            appDelegate.memes[indexX ?? Int()] = meme // to replace the meme image at given index after modifying it
          
+        // after tapping done, modifications happen and below code returns user to the table view
         let tabBarController = self.storyboard!.instantiateViewController(withIdentifier: "TabBarControllerInitialController") as! UITabBarController
         present(tabBarController, animated: true, completion: nil)
         
     }
-    /*
-    override func viewDidLayoutSubviews() { // @@@
-        super.viewDidLayoutSubviews()
-        setupEditor()
-        print("setupEditor occurs")
-    }
-    */
+    
 }
 
-/*
- Sources used:
- Udacity iOS Nanodegree lessons
- https://www.codingexplorer.com/choosing-images-with-uiimagepickercontroller-in-swift/
- https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
- https://sarunw.com/posts/how-to-add-custom-fonts-to-ios-app/
- https://www.codingexplorer.com/segue-swift-view-controllers
- https://www.ralfebert.com/ios-examples/uikit/uitableviewcontroller/custom-cells
- https://www.youtube.com/watch?v=aU_kTzMZHQ8
- https://developer.apple.com/documentation/uikit/uitableviewdelegate/1614998-tableview
- https://gist.github.com/RNHTTR/417f92e628ef6b300742dd8af94b206f
- https://stackoverflow.com/questions/26390072/how-to-remove-border-of-the-navigationbar-in-swift
- https://www.hackingwithswift.com/example-code/uikit/how-to-swipe-to-delete-uitableviewcells
- https://www.youtube.com/watch?v=F6dgdJCFS1Q
- https://github.com/glennaxworthy/Meme-Me-2.0
- https://medium.com/yay-its-erica/xcode-debugging-with-breakpoints-for-beginners-5b0d0a39d711
- https://learn.udacity.com/nanodegrees/nd003/parts/d39242a9-44f8-429c-8094-bf4969715419/lessons/2241133c-e88e-4877-88eb-273599e5e9b6/concepts/7d36557a-2362-42d1-aa12-ac81ccb9349f
- */
 
 
 
