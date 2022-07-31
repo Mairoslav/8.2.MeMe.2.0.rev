@@ -155,6 +155,7 @@ class MemeTableViewController: UITableViewController {
     // and to move the row from certain source to certain destination
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         memes.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+        appDelegate.memes.swapAt(sourceIndexPath.row, destinationIndexPath.row)
     }
     
 }
