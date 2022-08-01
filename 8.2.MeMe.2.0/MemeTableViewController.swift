@@ -56,12 +56,14 @@ class MemeTableViewController: UITableViewController {
     // MARK: Table View Data Source
     
     // MARK: 1. tableView(_:numberOfRowsInSection:)
+    // to determine the number of rows in Table View based on memes.count
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.memes.count
     }
     
     // MARK: 2.a tableView(_:cellForRowAt:) integrating custom table view cell
+    // to fill our cells with data
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -136,26 +138,37 @@ class MemeTableViewController: UITableViewController {
     }
     */
     
-    @IBAction func didTapSort() {
+    @IBOutlet var sortButton: UIBarButtonItem!
+    
+    @IBAction func sortButtonTapped(_ sender: Any) {
         // if table is editing we want to make it stop editing, otherwise we want to start editing
-        // editing means there is some operation that is changing something about table view
-        // you just need to know the table view that something is changing 
-        if table.isEditing {
-            table.isEditing = false
+        // just need to know the table view that something is changing
+        tableView.isEditing = !tableView.isEditing
+        
+        if tableView.isEditing {
+            sortButton.title = "sorted"
         } else {
-            table.isEditing = true
+            sortButton.title = "sort"
         }
+        
     }
     
-    // we want that table view can move row at... to be true
+    // method allows the row to be moved to another location in the table view
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    // and to move the row from certain source to certain destination
+    // method tells the data source to move a row at specific location in a table view to another location
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        memes.swapAt(sourceIndexPath.row, destinationIndexPath.row)
-        appDelegate.memes.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+        
+        let selectedItem = memes[sourceIndexPath.row]
+        memes.remove(at: sourceIndexPath.row)
+        memes.insert(selectedItem, at: destinationIndexPath.row)
+        
+        // so that changes are reflected in memes array
+        appDelegate.memes.remove(at: sourceIndexPath.row)
+        appDelegate.memes.insert(selectedItem, at: destinationIndexPath.row)
+        
     }
     
 }

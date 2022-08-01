@@ -145,9 +145,9 @@
                         <barButtonItem title="Item" image="square.and.pencil" catalog="system" id="Le2-P8-YLy"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Sent Memes" id="vmM-lT-aUY">
-                        <barButtonItem key="leftBarButtonItem" title="Sort" image="mount" catalog="system" id="DrY-Yd-dYk">
+                        <barButtonItem key="leftBarButtonItem" image="mount" catalog="system" id="DrY-Yd-dYk">
                             <connections>
-                                <action selector="didTapSort" destination="FOd-Vg-xCf" id="ByR-5W-uG9"/>
+                                <action selector="sortButtonTapped:" destination="FOd-Vg-xCf" id="mtS-hs-bqX"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="addNewMemeButton" image="plus.square.on.square" catalog="system" id="qcZ-VD-v4f">
@@ -158,6 +158,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="navigationBar" destination="vmM-lT-aUY" id="aRx-xg-fOt"/>
+                        <outlet property="sortButton" destination="DrY-Yd-dYk" id="Pf4-0N-6L6"/>
                         <outlet property="table" destination="Hby-LJ-d56" id="KBU-1X-RGh"/>
                     </connections>
                 </tableViewController>

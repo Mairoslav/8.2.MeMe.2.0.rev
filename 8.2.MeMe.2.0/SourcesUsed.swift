@@ -54,6 +54,8 @@ import Foundation
  Parameters and Arguments
     https://press.rebus.community/programmingfundamentals/chapter/parameters-and-arguments/
  
- Move TableView Cells in Swift 5 (Xcode 11) | 2020
+ Move TableView Cells
     https://www.youtube.com/watch?v=GUnzTIYSucU
+    https://www.ioscreator.com/tutorials/reorder-rows-table-view-ios-tutorial-ios12
+    https://www.youtube.com/watch?v=DQNzIiTaV8U
  */
