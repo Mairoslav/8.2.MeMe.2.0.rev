@@ -138,18 +138,12 @@ class MemeTableViewController: UITableViewController {
     }
     */
     
+    
     @IBOutlet var sortButton: UIBarButtonItem!
     
     @IBAction func sortButtonTapped(_ sender: Any) {
-        // if table is editing we want to make it stop editing, otherwise we want to start editing
-        // just need to know the table view that something is changing
-        tableView.isEditing = !tableView.isEditing
         
-        if tableView.isEditing {
-            sortButton.title = "sorted"
-        } else {
-            sortButton.title = "sort"
-        }
+        tableView.isEditing = !tableView.isEditing
         
     }
     

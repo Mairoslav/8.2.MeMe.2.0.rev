@@ -7,7 +7,9 @@
 
 import UIKit
 
-class MemeCollectionViewController: UICollectionViewController { // new 2.0
+// Redundant conformance of 'MemeCollectionViewController' to protocol 'UICollectionViewDataSource', 'UICollectionViewDelegate'
+// only UICollectionViewDelegateFlowLayout added vs previous base
+class MemeCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var memes: [Meme] = [] // need to change the array from [AnyObject] to [Meme]
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -21,13 +23,25 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
         return appDelegate.memes
     }
     */
+    
+    // private var collectionView: UICollectionView? // why no declaration needed?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // set Collection Constraints
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 118, height: 118)
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        // for drag&drop
         collectionView.collectionViewLayout = layout
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        view.addSubview(collectionView ?? UICollectionView())
+        
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        collectionView?.addGestureRecognizer(gesture)
         
     }
     
@@ -73,6 +87,66 @@ class MemeCollectionViewController: UICollectionViewController { // new 2.0
         detailController.index = indexPath.row // to change an array need its index, see MemeDetailVC
         
         self.navigationController!.pushViewController(detailController, animated: true)
+    }
+    
+    // MARK: drag&drop
+    
+    // MARK: long press gesture recognizer
+    
+    // for drag&drop
+    @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+        // unwrap collection view
+        guard let collectionView = collectionView else {
+            return
+        }
+        
+        // MARK: switch over the states (.began, .changed, .ended) on the gesture, and handle interactive movements accordingly
+        
+        // for drag&drop, to react based on gesture location
+        switch gesture.state {
+        case .began:
+            // here we want to get the index path of collection where first touched
+            guard let targetIndexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else {
+                return // if we are not able to get an index path we are going to return, if user pressing out of area...
+            }
+            collectionView.beginInteractiveMovementForItem(at: targetIndexPath)
+        case .changed:
+            collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: collectionView))
+        case .ended:
+            collectionView.endInteractiveMovement()
+        default:
+            collectionView.cancelInteractiveMovement()
+        }
+        
+    }
+    
+    // subview layout bounds
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView?.frame = view.bounds
+    }
+    
+    // return CGSize as defined for layout in viewDidLoad()
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 118, height: 118)
+    }
+    
+    // MARK: two re-order methods
+    
+    // telling collection view that given item at indexPath position can move
+    override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // telling where to shift data model
+    override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // to swap the positions in the array
+        let item = memes.remove(at: sourceIndexPath.row)
+        memes.insert(item, at: destinationIndexPath.row)
+        
+        // so that re-order changes are reflected also in table
+        appDelegate.memes.remove(at: sourceIndexPath.row)
+        appDelegate.memes.insert(item, at: destinationIndexPath.row)
     }
     
 }

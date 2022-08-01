@@ -24,7 +24,7 @@
                         </imageReference>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9WB-0G-5wV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -67,7 +67,7 @@
                         </imageReference>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d63-qF-ih1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -145,9 +145,9 @@
                         <barButtonItem title="Item" image="square.and.pencil" catalog="system" id="Le2-P8-YLy"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Sent Memes" id="vmM-lT-aUY">
-                        <barButtonItem key="leftBarButtonItem" image="mount" catalog="system" id="DrY-Yd-dYk">
+                        <barButtonItem key="leftBarButtonItem" title="sortButton" image="mount" catalog="system" id="A4Q-zF-JYp">
                             <connections>
-                                <action selector="sortButtonTapped:" destination="FOd-Vg-xCf" id="mtS-hs-bqX"/>
+                                <action selector="sortButtonTapped:" destination="FOd-Vg-xCf" id="KMf-9b-IZD"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="addNewMemeButton" image="plus.square.on.square" catalog="system" id="qcZ-VD-v4f">
@@ -158,8 +158,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="navigationBar" destination="vmM-lT-aUY" id="aRx-xg-fOt"/>
-                        <outlet property="sortButton" destination="DrY-Yd-dYk" id="Pf4-0N-6L6"/>
+                        <outlet property="sortButton" destination="A4Q-zF-JYp" id="6WA-e2-0Fr"/>
                         <outlet property="table" destination="Hby-LJ-d56" id="KBU-1X-RGh"/>
                     </connections>
                 </tableViewController>

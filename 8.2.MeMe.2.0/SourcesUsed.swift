@@ -58,4 +58,7 @@ import Foundation
     https://www.youtube.com/watch?v=GUnzTIYSucU
     https://www.ioscreator.com/tutorials/reorder-rows-table-view-ios-tutorial-ios12
     https://www.youtube.com/watch?v=DQNzIiTaV8U
+ 
+ Drag & Drop CollectionView Cells
+    https://www.youtube.com/watch?v=VrW_6EixIVQ
  */
