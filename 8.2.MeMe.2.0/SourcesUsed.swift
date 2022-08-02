@@ -10,8 +10,9 @@ import Foundation
 // MARK: Sources used
 
 /*
- Udacity iOS Nanodegree lessons
+ Udacity iOS Nanodegree lessons & Mentor help
     https://www.udacity.com/course/ios-developer-nanodegree--nd003
+    https://knowledge.udacity.com/?nanodegree=nd003&page=1&project=20&rubric=1960
  
  Choosing Images with UIImagePickerController in Swift
     https://www.codingexplorer.com/choosing-images-with-uiimagepickercontroller-in-swift/

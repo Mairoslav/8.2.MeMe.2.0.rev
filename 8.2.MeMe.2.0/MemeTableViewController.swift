@@ -21,7 +21,8 @@ class MemeTableViewCell: UITableViewCell {
 
 class MemeTableViewController: UITableViewController {
     
-    @IBOutlet var table: UITableView! // swipe to delete table row
+    // for swipe to delete table row
+    @IBOutlet var table: UITableView!
     
     /*
     var memes: [Meme]! {
