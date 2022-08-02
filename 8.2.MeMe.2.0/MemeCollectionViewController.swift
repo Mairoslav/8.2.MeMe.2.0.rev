@@ -140,13 +140,13 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     
     // telling where to shift data model
     override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // to swap the positions in the array
-        let item = memes.remove(at: sourceIndexPath.row)
-        memes.insert(item, at: destinationIndexPath.row)
+        // to switch the positions in the array by remove at source and insert at destination
+        let draggedItem = memes.remove(at: sourceIndexPath.row)
+        memes.insert(draggedItem, at: destinationIndexPath.row)
         
-        // so that re-order changes are reflected also in table
+        // so that re-order changes are reflected also in table, apply shared model object memes
         appDelegate.memes.remove(at: sourceIndexPath.row)
-        appDelegate.memes.insert(item, at: destinationIndexPath.row)
+        appDelegate.memes.insert(draggedItem, at: destinationIndexPath.row)
     }
     
 }

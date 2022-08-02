@@ -159,7 +159,7 @@ class MemeTableViewController: UITableViewController {
         memes.remove(at: sourceIndexPath.row)
         memes.insert(selectedItem, at: destinationIndexPath.row)
         
-        // so that changes are reflected in memes array
+        // so that re-order changes are reflected also in collection, apply shared model object memes
         appDelegate.memes.remove(at: sourceIndexPath.row)
         appDelegate.memes.insert(selectedItem, at: destinationIndexPath.row)
         

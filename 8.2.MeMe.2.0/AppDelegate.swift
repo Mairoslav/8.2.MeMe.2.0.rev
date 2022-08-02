@@ -13,7 +13,8 @@ import UIKit
     
     // MARK: Properties
     
-    var memes = [Meme]() // new 2.0, shared model
+    //  shared model object - shared between the two view controllers
+    var memes = [Meme]() 
     
     // MARK: UIApplicationDelegate
     
