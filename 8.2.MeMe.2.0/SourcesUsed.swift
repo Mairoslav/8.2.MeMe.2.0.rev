@@ -65,4 +65,14 @@ import Foundation
  
  Drag & Drop CollectionView Cells
     https://www.youtube.com/watch?v=VrW_6EixIVQ
+ 
+ AutocapitalizationType Not working
+    https://stackoverflow.com/questions/4449201/autocapitalizationtype-not-working
+    https://developer.apple.com/documentation/uikit/uitextinputtraits/1624447-autocapitalizationtype
+ 
+ Avoid verbosity of self, use where necessary - see Udacity Swift naming and style conventions:
+    https://github.com/github/swift-style-guide
+ 
+ Udacity review input
+    https://review.udacity.com/#!/reviews/3623025
  */

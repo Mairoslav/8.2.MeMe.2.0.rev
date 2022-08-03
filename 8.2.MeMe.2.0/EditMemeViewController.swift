@@ -37,7 +37,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     var indexX: Int? // to replace the meme image at given index when editing it
     
     var imagePicker = UIImagePickerController() // an instance of UIImagePickerController
-
+    
+    var textField: UITextField!
     
     // MARK: view-DidLoad/willAppear/willDisappear
     
@@ -50,14 +51,19 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // topTextField.delegate = self // need when text style via storyboard
         
         // need when text style progamaticaly via method configureTextField(textField: UITextField)
-        configureTextField(textField: bottomTextField)
-        configureTextField(textField: topTextField)
-        showHideDoneButton() // show done button only when already saved memeIsModified = true
+        configureTextField(textField: topTextField,styledDefaultInput: "")
+        configureTextField(textField: bottomTextField, styledDefaultInput: "")
+        
+        // show done button only when already saved memeIsModified = true
+        showHideDoneButton()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false // deleted self. from beggining
+        // when accessing properties or methods on self, leave the reference to self implicit by default
+        // only include the explicit keyword when required by the language—for example, in a closure, or when parameter names conflict
         
         // disable the camera button in cases when this bool returns false for the camera sourceType
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -123,8 +129,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             // setting the “content mode” of the UIImageView.
             // imagePickerView.contentMode = .scaleToFill // distorted
-            // imagePickerView.contentMode = .scaleAspectFit // fit view, minimized to avoid distortion
-            imagePickerView.contentMode = .scaleAspectFill // fit view, clipped to avoid distortion
+            imagePickerView.contentMode = .scaleAspectFit // fit view, minimized to avoid distortion
+            // imagePickerView.contentMode = .scaleAspectFill // fit view, clipped to avoid distortion
             imagePickerView.image = pickedImage // sets the image of the UIImageView to be the image we just got pack.
             
             shareButton.isEnabled = true // once we have picture we enable share button
@@ -144,7 +150,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // when a user taps inside the textfiels the default text should clear
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.text == "TOP" || textField.text == "BOTTOM" {
+        if textField.text == "HEADER" || textField.text == "FOOTER" {
             textField.text = ""
         }
     }
@@ -159,7 +165,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     //MARK: Text style in textFields
     
-    func configureTextField(textField: UITextField) {
+    // configureTextField is declared in viewDidLoad()
+    func configureTextField(textField: UITextField, styledDefaultInput: String) {
         let textStyle: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black,
             NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -167,19 +174,41 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             NSAttributedString.Key.strokeWidth: -4]
                 as [NSAttributedString.Key : Any]
         
-        topTextField.attributedPlaceholder = NSAttributedString(string: "TOP", attributes: textStyle)
-        bottomTextField.attributedPlaceholder = NSAttributedString(string: "BOTTOM", attributes: textStyle)
+        // instead of repeating this line(s),added a new parameter styledDefaultInput: String to method configureTextField
+        // topTextField.attributedPlaceholder = NSAttributedString(string: "HEADER", attributes: textStyle)
+        // bottomTextField.attributedPlaceholder = NSAttributedString(string: "FOOTER", attributes: textStyle)
+        
+        var styledDefaultInput = "HEADER"
+        topTextField.text = styledDefaultInput
+        styledDefaultInput = "FOOTER"
+        bottomTextField.text = styledDefaultInput
+        
+        textField.delegate = self
+        
+        textField.defaultTextAttributes = textStyle
         
         // textField.layer.borderWidth = 0
         // textField.layer.borderColor = UIColor.clear.cgColor
         // ↪ no, go identity inspector/Border style/none or code below
-        textField.borderStyle = UITextField.BorderStyle.none
         
-        textField.textAlignment = .center
-        textField.delegate = self
+        // no border style to avoid thin line on screen - visible also with code above
+        textField.borderStyle = .none
         
-        textField.defaultTextAttributes = textStyle
-        textField.textAlignment = NSTextAlignment.center
+        // because UIKeyboardType.numberPad, .phonePad,.namePhonePad do not support autocapitalization
+        textField.keyboardType = .webSearch
+        textField.autocorrectionType = .no
+       
+        // code below or mainStoryboard/TextField/TextInputTraits/Capitalization
+        textField.autocapitalizationType = .allCharacters // why does not work?
+        // If using your hardware e.g iPhone keyboard, it ignores auto capitalization
+        // If using the keypad on the simulator screen, it should auto-capitalize the .words, .allCharacters... as per selection
+        
+        // text to shrink when it does start to exceeding the textField
+        // code below or mainStoryboard/TextField/AdjustToFit
+        textField.adjustsFontSizeToFitWidth = true
+        
+        textField.textAlignment = .center // or alternative way below, but no need to state NSTextAlignment., similar with "textField.borderStyle = UITextField.BorderStyle.none", and others - enough as above
+        // textField.textAlignment = NSTextAlignment.center
         
     }
     
@@ -191,9 +220,9 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @objc func keybordWillShow(_ notification: Notification) {
         // To move the view up above the keybord, frame view is reduced by the height of keybord vs original vertical position (y)
         if bottomTextField.isFirstResponder {
-                    // view.frame.origin.y = getKeyboardHeight(notification) * (-1)
-                    view.frame.origin.y = -getKeyboardHeight(notification)
-                }
+            // view.frame.origin.y = getKeyboardHeight(notification) * (-1)
+            view.frame.origin.y = -getKeyboardHeight(notification)
+            }
     }
     
     // get keybord height
@@ -205,8 +234,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // keybord does hide, frame view is again in original vertical position (y)
     @objc func keyboardWillHide(_ notification: Notification) {
-            if bottomTextField.isFirstResponder {
-                view.frame.origin.y = 0
+        if bottomTextField.isFirstResponder {
+            view.frame.origin.y = 0
             }
         }
     
@@ -291,7 +320,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // when sharing the meme, the save function must not be called if the user decides to cancel the activity view. Therefore adding an if statement here checking the success property.
         activityVC.completionWithItemsHandler = { activity, success, items, error in
             if success {
-                self.save()
+                self.save() 
                 self.dismiss(animated: true, completion: nil)
             } else {
                 self.dismiss(animated: true, completion: nil)
@@ -304,8 +333,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: cancel
     
     @IBAction func cancel(_ sender: Any) {
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
+        topTextField.text = "HEADER"
+        bottomTextField.text = "FOOTER"
         self.imagePickerView.image = nil
         shareButton.isEnabled = false // no picture no share button
         dismiss(animated: true, completion: nil) // cancel button to return user to the Sent Memes View
@@ -332,8 +361,14 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             appDelegate.memes[indexX ?? Int()] = meme // to replace the meme image at given index after modifying it
          
         // after tapping done, modifications happen and below code returns user to the table view
+        /*
         let tabBarController = self.storyboard!.instantiateViewController(withIdentifier: "TabBarControllerInitialController") as! UITabBarController
         present(tabBarController, animated: true, completion: nil)
+        */
+        
+        // after tapping done, modifications happen in array, table & collection however are not yet reflected in the Meme Detail
+        dismiss(animated: true, completion: nil)
+        // how can I display changes in MemeDetailViewController right after pressing done button?
         
     }
     

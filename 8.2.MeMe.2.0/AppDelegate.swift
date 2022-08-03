@@ -20,10 +20,10 @@ import UIKit
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // remove border of the navigationBar -> no thin line on screen
+        // remove border of the navigationBar
         UINavigationBar.appearance().shadowImage = UIImage()
         
-        // remove border of the Toolbar -> no thin line on screen
+        // remove border of the Toolbar 
         UIToolbar.appearance().setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.any)
         
         return true
