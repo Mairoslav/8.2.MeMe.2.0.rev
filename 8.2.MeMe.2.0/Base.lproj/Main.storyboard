@@ -416,9 +416,11 @@
                         <outlet property="toolbar" destination="0Jx-xc-mXl" id="qgr-z5-6Mm"/>
                         <outlet property="topNavBar" destination="Rr2-pv-L8C" id="eBw-T2-UMI"/>
                         <outlet property="topTextField" destination="dnU-KC-ohy" id="Qun-fx-QXD"/>
+                        <segue destination="IhN-aK-Mxf" kind="unwind" identifier="unwindSegueToMemeTableViewController" unwindAction="unwindToMemeTableViewControllerWithSegue:" id="lwK-Tu-aRz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="IhN-aK-Mxf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="23" y="-261"/>
         </scene>

@@ -75,4 +75,8 @@ import Foundation
  
  Udacity review input
     https://review.udacity.com/#!/reviews/3623025
+ 
+ Dismiss more than one view controller simultaneously
+    https://stackoverflow.com/questions/30990507/dismiss-more-than-one-view-controller-simultaneously
+    https://medium.com/@mimicatcodes/create-unwind-segues-in-swift-3-8793f7d23c6f
  */

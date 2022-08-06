@@ -21,6 +21,8 @@ class MemeTableViewCell: UITableViewCell {
 
 class MemeTableViewController: UITableViewController {
     
+    @IBAction func unwindToMemeTableViewController(segue: UIStoryboardSegue) {}
+    
     // for swipe to delete table row
     @IBOutlet var table: UITableView!
     

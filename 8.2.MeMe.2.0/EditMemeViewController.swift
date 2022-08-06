@@ -196,6 +196,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         
         // because UIKeyboardType.numberPad, .phonePad,.namePhonePad do not support autocapitalization
         textField.keyboardType = .webSearch
+        
         textField.autocorrectionType = .no
        
         // code below or mainStoryboard/TextField/TextInputTraits/Capitalization
@@ -332,12 +333,13 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // MARK: cancel
     
+    // cancel button to reset editor to HEADER,FOOTER, noImage and return user to the Sent Memes View
     @IBAction func cancel(_ sender: Any) {
         topTextField.text = "HEADER"
         bottomTextField.text = "FOOTER"
         self.imagePickerView.image = nil
         shareButton.isEnabled = false // no picture no share button
-        dismiss(animated: true, completion: nil) // cancel button to return user to the Sent Memes View
+        dismiss(animated: true, completion: nil)
     }
     
     // show done button only when already saved memeIsModified = true
@@ -359,20 +361,34 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
             appDelegate.memes[indexX ?? Int()] = meme // to replace the meme image at given index after modifying it
+        
          
-        // after tapping done, modifications happen and below code returns user to the table view
+        // after tapping done, modifications happen and below code returns user to the a) table view
+        // EditMemeViewController as self does performSegue with ID to return user to the MemeTableViewController
+        // self.performSegue(withIdentifier: "unwindSegueToMemeTableViewController", sender: self)
+        
+        // or alternative code:
+        
         /*
         let tabBarController = self.storyboard!.instantiateViewController(withIdentifier: "TabBarControllerInitialController") as! UITabBarController
         present(tabBarController, animated: true, completion: nil)
         */
         
-        // after tapping done, modifications happen in array, table & collection however are not yet reflected in the Meme Detail
+        // after tapping done, modifications happen and below code returns user to the b) detail view
         dismiss(animated: true, completion: nil)
-        // how can I display changes in MemeDetailViewController right after pressing done button?
+        // modifications happen in array, table & collection however are not yet reflected in the Meme Detail
+        // how can I reflect/display changes in MemeDetailViewController right after pressing done button?
         
+        // to update the MemeDetail View you can
+        // have an additional property for the index - so that you know which image was and
+        // access it (index/image) again from the shared array in the app delegate
+        // and not from the previously passed meme property
+         
     }
     
 }
+
+
 
 
 
