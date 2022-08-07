@@ -79,4 +79,9 @@ import Foundation
  Dismiss more than one view controller simultaneously
     https://stackoverflow.com/questions/30990507/dismiss-more-than-one-view-controller-simultaneously
     https://medium.com/@mimicatcodes/create-unwind-segues-in-swift-3-8793f7d23c6f
+ 
+ Orientation Responsive UI in iOS
+    https://medium.com/codewords/orientation-responsive-ui-in-ios-beea7644b3c
+    https://github.com/prakhar30/OrientationResponsiveUI
+    https://stackoverflow.com/questions/25796545/getting-device-orientation-in-swift
  */

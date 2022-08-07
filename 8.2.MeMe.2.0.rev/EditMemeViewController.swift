@@ -28,7 +28,11 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    @IBOutlet weak var doneButton: UIBarButtonItem! // @@@
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    // Orientation Responsive UI in iOS
+    @IBOutlet var IBConstraints: [NSLayoutConstraint]!
+    var landscapeConstraints: [NSLayoutConstraint] = []
     
     var savedMemeForEdit: Meme! // to enable editing saved meme in detail view, had to change ? to !
     
@@ -56,6 +60,9 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         
         // show done button only when already saved memeIsModified = true
         showHideDoneButton()
+        
+        // Orientation Responsive UI in iOS
+        NotificationCenter.default.addObserver(self, selector: #selector(self.orientationChanged), name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
         
     }
     
@@ -390,7 +397,51 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
          
     }
     
+    // MARK: Orientation Responsive UI in iOS
+        
+    @objc func orientationChanged(notification: NSNotification) {
+        let deviceOrientation = UIDevice.current.orientation
+        // UIApplication.shared.statusBarOrientation
+
+            switch deviceOrientation {
+            case .portrait:
+                fallthrough
+            case .portraitUpsideDown:
+                print("Portrait")
+                self.applyPortraitConstraints()
+            case .landscapeLeft:
+                fallthrough
+            case .landscapeRight:
+                print("landscape")
+                self.applyLandscapeConstraints()
+            case .unknown:
+                print("unknown orientation")
+            case .faceUp:
+                print("faceUp")
+            case .faceDown:
+                print("faceDown")
+            @unknown default:
+                print("unknown case in orientation change")
+        }
+    }
+    
+    // get landscapeConstraints
+    func applyLandscapeConstraints() {
+        // breaking the constraints
+        NSLayoutConstraint.deactivate(IBConstraints)
+        // after deactivated one set of constraints, in our case portrait (or Interface builder), now create constraints programmatically for landscape
+        landscapeConstraints = ConstraintsHelper.applyLandscapeConstraints(view: self.view, topTextField: topTextField, bottomTextField: bottomTextField)
+        }
+
+    // get back to portraitConstraints
+    func applyPortraitConstraints() {
+        NSLayoutConstraint.deactivate(landscapeConstraints)
+        view.addConstraints(IBConstraints)
+    }
+
 }
+    
+
 
 
 
