@@ -309,7 +309,7 @@
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="line" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aO0-iW-1el" userLabel="bottomTextField">
-                                <rect key="frame" x="0.0" y="386" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="336" width="320" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -328,7 +328,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="line" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dnU-KC-ohy" userLabel="topTextField">
-                                <rect key="frame" x="0.0" y="44" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="84" width="320" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -369,7 +369,7 @@
                                             <barButtonItem title="cancel" id="Lhf-aM-gkT" userLabel="cancelButton">
                                                 <color key="tintColor" systemColor="systemBlueColor"/>
                                                 <connections>
-                                                    <action selector="cancel:" destination="BYZ-38-t0r" id="tPg-2M-hoq"/>
+                                                    <action selector="cancelButtonTapped:" destination="BYZ-38-t0r" id="3Yy-Hc-RbG"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem title="done" id="weo-s8-oEh">
@@ -390,12 +390,12 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="YXP-BJ-zry" secondAttribute="top" id="6M0-Ca-UKh"/>
                             <constraint firstItem="YXP-BJ-zry" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IpX-qZ-FlA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YXP-BJ-zry" secondAttribute="bottom" id="RP9-pD-sds"/>
-                            <constraint firstItem="0Jx-xc-mXl" firstAttribute="top" secondItem="aO0-iW-1el" secondAttribute="bottom" id="TCi-Uj-PWJ"/>
+                            <constraint firstItem="0Jx-xc-mXl" firstAttribute="top" secondItem="aO0-iW-1el" secondAttribute="bottom" constant="50" id="TCi-Uj-PWJ"/>
                             <constraint firstItem="0Jx-xc-mXl" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Wcw-yH-xUF"/>
                             <constraint firstItem="YXP-BJ-zry" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hcB-dP-4M5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Jx-xc-mXl" secondAttribute="trailing" id="lkL-tg-Hrs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dnU-KC-ohy" secondAttribute="trailing" id="mh0-nS-Tbh"/>
-                            <constraint firstItem="dnU-KC-ohy" firstAttribute="top" secondItem="Rr2-pv-L8C" secondAttribute="bottom" id="mkl-w6-jjr"/>
+                            <constraint firstItem="dnU-KC-ohy" firstAttribute="top" secondItem="Rr2-pv-L8C" secondAttribute="bottom" constant="40" id="mkl-w6-jjr" userLabel="topTextField.top = TopNavBar.bottom + 50"/>
                             <constraint firstItem="dnU-KC-ohy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o7o-0n-hhM"/>
                             <constraint firstItem="Rr2-pv-L8C" firstAttribute="trailing" secondItem="0Jx-xc-mXl" secondAttribute="trailing" id="qZC-0Z-Tri"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aO0-iW-1el" secondAttribute="trailing" id="s63-dJ-J3E"/>

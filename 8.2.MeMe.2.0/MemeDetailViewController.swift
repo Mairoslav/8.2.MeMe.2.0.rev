@@ -11,21 +11,29 @@ class MemeDetailViewController: UIViewController {
     
     var meme: Meme!
     
-    var index: Int? // to change an array need its index, index is provided when user selects a meme in the table or collection view. This index should also be passed to the MemeEditor so you can use it when saving the changed meme - see indexX in EditMemeViewController. 
+    // var indexN: Int?
+    
+    var indexD: Int? // to change an array need its index, index is provided when user selects a meme in the table or collection view. This index should also be passed to the MemeEditor so you can use it when saving the changed meme - see indexX in EditMemeViewController.
     
     @IBOutlet weak var savedMemeDetail: UIImageView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true // hide bottom tab bar
-        savedMemeDetail.image = meme.memedImage // show detail of saved meme
+        
+        // so that I can access appDelegate in the scope of current file
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        let memeUpdated = appDelegate.memes[indexD ?? Int()] // to replace the meme image at given index after modifying it ~ to reflect/display changes in MemeDetailViewController right after pressing done button
+        
+        savedMemeDetail.image = memeUpdated.memedImage // show detail of saved meme
     }
     
     @IBAction func editSavedMeme(_ sender: Any) {
         let editMemeViewController = self.storyboard!.instantiateViewController(withIdentifier: "EditMemeViewController") as! EditMemeViewController
         
         editMemeViewController.savedMemeForEdit = meme // .memedImage
-        editMemeViewController.indexX = index // pass the index from MemeDetailViewController to EditMemeViewController so that edited meme does replace itself
+        editMemeViewController.indexE = indexD // pass the index from MemeDetailViewController to EditMemeViewController so that edited meme does replace itself
         
         // navigationController!.pushViewController(editMemeViewController, animated: true)
         // instead of using above commented out pushViewController..., use present to avoid displaying table and collection icons in Meme Editor ->

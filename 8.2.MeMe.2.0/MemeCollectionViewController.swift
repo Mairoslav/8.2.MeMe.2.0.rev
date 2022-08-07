@@ -84,7 +84,7 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         
         let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
         detailController.meme = self.memes[indexPath.item]
-        detailController.index = indexPath.row // to change an array need its index, see MemeDetailVC
+        detailController.indexD = indexPath.row // to change an array need its index, see MemeDetailVC
         
         self.navigationController!.pushViewController(detailController, animated: true)
     }

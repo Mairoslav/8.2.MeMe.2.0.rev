@@ -34,7 +34,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     
     var memeIsModified = false // for done button to show only when already saved memeIsModified
     
-    var indexX: Int? // to replace the meme image at given index when editing it
+    var indexE: Int? // to replace the meme image at given index when editing it
     
     var imagePicker = UIImagePickerController() // an instance of UIImagePickerController
     
@@ -334,7 +334,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: cancel
     
     // cancel button to reset editor to HEADER,FOOTER, noImage and return user to the Sent Memes View
-    @IBAction func cancel(_ sender: Any) {
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
         topTextField.text = "HEADER"
         bottomTextField.text = "FOOTER"
         self.imagePickerView.image = nil
@@ -355,15 +356,16 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         let memedImage = generateMemedImage()
         
         // to put together layers of modified meme, texts, image and final "blended" memedImage
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image ?? UIImage(), memedImage: memedImage) // with init, see file MemeStruct
+        let memeUpdated = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imagePickerView.image ?? UIImage(), memedImage: memedImage) // with init, see file MemeStruct
         
         // so that I can access appDelegate in the scope of current file
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
-            appDelegate.memes[indexX ?? Int()] = meme // to replace the meme image at given index after modifying it
-        
+            appDelegate.memes[indexE ?? Int()] = memeUpdated // to replace the meme image at given index after modifying it
+
          
-        // after tapping done, modifications happen and below code returns user to the a) table view
+        // MARK: after tapping done, modifications happen and below code returns user to the a) table view
+        
         // EditMemeViewController as self does performSegue with ID to return user to the MemeTableViewController
         // self.performSegue(withIdentifier: "unwindSegueToMemeTableViewController", sender: self)
         
@@ -374,10 +376,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         present(tabBarController, animated: true, completion: nil)
         */
         
-        // after tapping done, modifications happen and below code returns user to the b) detail view
+        // MARK: after tapping done, modifications happen and below code returns user to the b) detail view
+        
         dismiss(animated: true, completion: nil)
+        
         // modifications happen in array, table & collection however are not yet reflected in the Meme Detail
-        // how can I reflect/display changes in MemeDetailViewController right after pressing done button?
+        // to reflect/display changes in MemeDetailViewController right after pressing done button 
         
         // to update the MemeDetail View you can
         // have an additional property for the index - so that you know which image was and
