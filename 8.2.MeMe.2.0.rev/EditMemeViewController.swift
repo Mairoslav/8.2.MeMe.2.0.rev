@@ -99,11 +99,15 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         */
         
         // without code below when user starts editing meme, the default constraints as per portrait instead of landspape orientation are applied because func orientationChanged is not yet run since the orientatation of phone had not yet changed
+        // had to cover both landscape right & left, otherwise the topTextField is once shown as set and other time too high
+        
         if UIDevice.current.orientation == .portrait {
-            applyPortraitConstraints()
-        } else {
-            applyLandscapeConstraints()
-        }
+                    applyPortraitConstraints()
+                } else if UIDevice.current.orientation == .landscapeRight {
+                    applyLandscapeConstraints()
+                } else if UIDevice.current.orientation == .landscapeLeft {
+                    applyLandscapeConstraints()
+                }
         
         // show done button only when already saved memeIsModified = true
         showHideDoneButton()
