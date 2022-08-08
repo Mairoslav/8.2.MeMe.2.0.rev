@@ -27,6 +27,7 @@ class MemeDetailViewController: UIViewController {
         let memeUpdated = appDelegate.memes[indexD ?? Int()] // to replace the meme image at given index after modifying it ~ to reflect/display changes in MemeDetailViewController right after pressing done button
         
         savedMemeDetail.image = memeUpdated.memedImage // show detail of saved meme
+
     }
     
     @IBAction func editSavedMeme(_ sender: Any) {
@@ -43,7 +44,7 @@ class MemeDetailViewController: UIViewController {
         // present(editMemeViewController, animated: true)
         
         // display image so that is covers the whole screen area
-        editMemeViewController.imagePickerView.contentMode = .scaleAspectFill
+        editMemeViewController.imagePickerView.contentMode = .scaleAspectFit // changed from .scaleAspectFill that was causing different scaling of image in editMemeViewController for editing already created meme ~ memeUpdated
         
         // done button to show only when already saved memeIsModified = true
         editMemeViewController.memeIsModified = true
@@ -51,4 +52,8 @@ class MemeDetailViewController: UIViewController {
     }
     
 }
+
+// imagePickerView.contentMode = .scaleToFill // distorted
+    // imagePickerView.contentMode = .scaleAspectFit // fit view, minimized to avoid distortion
+// imagePickerView.contentMode = .scaleAspectFill // fit view, clipped to avoid distortion
 

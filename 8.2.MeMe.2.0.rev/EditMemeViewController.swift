@@ -61,7 +61,10 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // show done button only when already saved memeIsModified = true
         showHideDoneButton()
         
-        // Orientation Responsive UI in iOS
+        // MARK: Orientation Responsive UI in iOS
+        
+        // for name: versus "UIApplication.didChangeStatusBarOrientationNotification" for which now warning "'didChangeStatusBarOrientationNotification' was deprecated in iOS 13.0: Use viewWillTransitionToSize:withTransitionCoordinator: instead." I do use nil as options described in developer documentation
+        // now changed back to ame: UIApplication.didChangeStatusBarOrientationNotification
         NotificationCenter.default.addObserver(self, selector: #selector(self.orientationChanged), name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
         
     }
@@ -95,7 +98,15 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         */
         
-        showHideDoneButton() // show done button only when already saved memeIsModified = true
+        // without code below when user starts editing meme, the default constraints as per portrait instead of landspape orientation are applied because func orientationChanged is not yet run since the orientatation of phone had not yet changed
+        if UIDevice.current.orientation == .portrait {
+            applyPortraitConstraints()
+        } else {
+            applyLandscapeConstraints()
+        }
+        
+        // show done button only when already saved memeIsModified = true
+        showHideDoneButton()
         
     }
     
@@ -398,7 +409,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     // MARK: Orientation Responsive UI in iOS
-        
+    
     @objc func orientationChanged(notification: NSNotification) {
         let deviceOrientation = UIDevice.current.orientation
         // UIApplication.shared.statusBarOrientation
@@ -407,12 +418,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             case .portrait:
                 fallthrough
             case .portraitUpsideDown:
-                print("Portrait")
+                print("Portrait iPhone orientation")
                 self.applyPortraitConstraints()
             case .landscapeLeft:
                 fallthrough
             case .landscapeRight:
-                print("landscape")
+                print("Landscape iPhone orientation")
                 self.applyLandscapeConstraints()
             case .unknown:
                 print("unknown orientation")
